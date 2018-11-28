@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux';
 
-import { chatroom } from './chatroom.reducer';
+import { chatrooms } from './chatrooms.reducer';
+import { alert } from './alert.reducer';
 
 const rootReducer = combineReducers({
-  chatroom
+  chatrooms,
+  alert
 });
 
 export default rootReducer;

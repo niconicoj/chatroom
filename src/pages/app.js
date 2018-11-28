@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import withRoot from '../withRoot';
 
-import Main from './mainpage/Main'
+import { Main } from './mainpage/Main'
 
 const styles = theme => ({
   root: {
@@ -15,21 +15,18 @@ const styles = theme => ({
   },
 });
 
-class Index extends React.Component {
+class App extends React.Component {
   
   render() {
-    const { classes } = this.props;
 
     return (
-      <div className={classes.root}>
-        <Main />
-      </div>
+      <Main />
     );
   }
 }
 
-Index.propTypes = {
+App.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withRoot(withStyles(styles)(Index));
+export default withRoot(withStyles(styles)(App));

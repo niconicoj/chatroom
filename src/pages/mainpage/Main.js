@@ -1,8 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
 import { withStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
+import Modal from '@material-ui/core/Modal';
+import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import ErrorIcon from '@material-ui/icons/Error';
+
 import ChatroomDrawer from '../../components/drawer/ChatroomDrawer';
 import ChatroomAppBar from '../../components/appbar/ChatroomAppBar';
 
@@ -17,12 +26,42 @@ const styles = theme => ({
     height: '100vh',
     overflow: 'auto',
   },
+  progress: {
+    position: 'absolute',
+    margin: 'auto',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0
+  },
+  close: {
+    padding: theme.spacing.unit / 2,
+  },
+  error: {
+    backgroundColor: theme.palette.error.dark,
+  },
+  message: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  iconVariant: {
+    opacity: 0.9,
+    marginRight: theme.spacing.unit,
+  },
 });
 
 class Main extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+        loading: false,
+    };
+  }
 
   render() {
     const { classes } = this.props;
+    const { alert } = this.props;
 
     return (
       <div className={classes.root}>
@@ -44,6 +83,43 @@ class Main extends React.Component {
           donec massa sapien faucibus et molestie ac.
         </Typography>
         </main>
+        <Modal
+          aria-labelledby="simple-modal-title"
+          aria-describedby="simple-modal-description"
+          open={this.state.loading}
+          onClose={this.handleClose}
+        >
+          <CircularProgress className={classes.progress} size={200} color="secondary"/>
+        </Modal>
+        <Snackbar
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left',
+          }}
+          open={ alert.message && true }
+          autoHideDuration={6000}
+          variant="error"
+          ContentProps={{
+            'aria-describedby': 'message-id',
+          }}
+          message={
+            <span id="message-id" className={classes.message}>
+              <ErrorIcon className={classes.iconVariant}/>
+              {alert && alert.message}
+            </span>
+          }
+          action={[
+            <IconButton
+              key="close"
+              aria-label="Close"
+              color="inherit"
+              className={classes.close}
+              onClick={this.handleClose}
+            >
+              <CloseIcon />
+            </IconButton>,
+          ]}
+        />
       </div>
     );
   }
@@ -53,4 +129,12 @@ Main.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Main);
+function mapStateToProps(state) {
+    const { alert } = state;
+    return {
+        alert
+    };
+}
+
+const connectedMain = connect(mapStateToProps)(withStyles(styles)(Main));
+export { connectedMain as Main };

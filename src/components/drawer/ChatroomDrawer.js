@@ -4,11 +4,11 @@ import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
-import CreateChatroomButton from './CreateChatroomButton';
-import ChatList from './chatlist/ChatList';
+import { CreateChatroomButton } from './CreateChatroomButton';
+import { ChatList } from './chatlist/ChatList';
 
 
-const drawerWidth = 240;
+const drawerWidth = 320;
 
 const styles = theme => ({
   drawerPaper: {

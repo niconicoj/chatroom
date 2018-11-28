@@ -8,6 +8,7 @@
     "prop-types": "latest",
     "react": "latest",
     "react-dom": "latest",
+    "react-redux": "^5.1.1",
     "react-scripts": "latest",
     "recharts": "^1.4.1",
     "redux": "^4.0.1",

@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -10,6 +12,8 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+
+import { chatroomsActions } from '../../actions';
 
 
 class CreateChatroomButton extends React.Component {
@@ -24,6 +28,15 @@ class CreateChatroomButton extends React.Component {
 
   handleClose = () => {
     this.setState({ open: false });
+  };
+
+  handleChange = (e) => {
+    const { name, value } = e.target;
+    this.setState({ [name]: value });
+  }
+
+  handleCreate = () => {
+    this.props.dispatch(chatroomsActions.create(this.props.chatroomName));
   };
 
   render () {
@@ -55,13 +68,15 @@ class CreateChatroomButton extends React.Component {
               label="Chatroom name"
               type="email"
               fullWidth
+              name="chatroomName"
+              onChange={this.handleChange}
             />
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleClose} color="primary">
               Cancel
             </Button>
-            <Button onClick={this.handleClose} color="primary">
+            <Button onClick={this.handleCreate} color="primary">
               Create !
             </Button>
           </DialogActions>
@@ -71,5 +86,12 @@ class CreateChatroomButton extends React.Component {
   }
 }
 
+function mapStateToProps(state) {
+  const { chatrooms } = state;
+    return {
+      chatrooms
+    };
+}
 
-export default CreateChatroomButton;
+const connectedCreateChatroomButton = connect(mapStateToProps)(CreateChatroomButton);
+export { connectedCreateChatroomButton as CreateChatroomButton }; 
