@@ -35,7 +35,7 @@ class Lounge extends React.Component {
         <TextField
           id="outlined-full-width"
           label="Label"
-          style={{ margin: 8 }}
+          
           placeholder="Placeholder"
           fullWidth
           margin="normal"
