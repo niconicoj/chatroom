@@ -15,7 +15,7 @@ function create(chatroom) {
             .then(
                 chatroom => { 
                     dispatch(success(chatroom));
-                    dispatch(alertActions.success('Registration successful'));
+                    dispatch(alertActions.success('Chatroom Created !'));
                 },
                 error => {
                     dispatch(failure(error.toString()));

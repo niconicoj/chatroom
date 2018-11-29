@@ -41,6 +41,12 @@ class CreateChatroomButton extends React.Component {
     this.handleClose();
   };
 
+  handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      this.handleCreate();
+    }
+  }
+
   render () {
     return (
       <div>
@@ -72,6 +78,7 @@ class CreateChatroomButton extends React.Component {
               fullWidth
               name="chatroomName"
               onChange={this.handleChange}
+              onKeyPress={this.handleKeyPress}
             />
           </DialogContent>
           <DialogActions>
