@@ -14,6 +14,7 @@ import ErrorIcon from '@material-ui/icons/Error';
 
 import ChatroomDrawer from '../../components/drawer/ChatroomDrawer';
 import ChatroomAppBar from '../../components/appbar/ChatroomAppBar';
+import { FeedbackSnackbar } from '../../components/feedbacksnackbar/FeedbackSnackbar';
 
 const styles = theme => ({
   root: {
@@ -91,35 +92,7 @@ class Main extends React.Component {
         >
           <CircularProgress className={classes.progress} size={200} color="secondary"/>
         </Modal>
-        <Snackbar
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'left',
-          }}
-          open={ alert.message && true }
-          autoHideDuration={6000}
-          variant="error"
-          ContentProps={{
-            'aria-describedby': 'message-id',
-          }}
-          message={
-            <span id="message-id" className={classes.message}>
-              <ErrorIcon className={classes.iconVariant}/>
-              {alert && alert.message}
-            </span>
-          }
-          action={[
-            <IconButton
-              key="close"
-              aria-label="Close"
-              color="inherit"
-              className={classes.close}
-              onClick={this.handleClose}
-            >
-              <CloseIcon />
-            </IconButton>,
-          ]}
-        />
+        <FeedbackSnackbar />
       </div>
     );
   }
