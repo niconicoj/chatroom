@@ -9,7 +9,8 @@ export function chatrooms(state = {}, action) {
       };
     case chatroomsConstants.CREATE_SUCCESS:
       return {
-        items: action.chatrooms
+        ...state,
+        chatrooms: [...state.chatrooms, action.chatroom]
       };
     case chatroomsConstants.CREATE_FAILURE:
       return { 

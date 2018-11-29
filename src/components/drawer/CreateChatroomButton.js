@@ -20,6 +20,7 @@ class CreateChatroomButton extends React.Component {
 
   state = {
     open: false,
+    chatroomName: ""
   };
 
   handleClickOpen = () => {
@@ -36,7 +37,8 @@ class CreateChatroomButton extends React.Component {
   }
 
   handleCreate = () => {
-    this.props.dispatch(chatroomsActions.create(this.props.chatroomName));
+    this.props.dispatch(chatroomsActions.create(this.state.chatroomName));
+    this.handleClose();
   };
 
   render () {
