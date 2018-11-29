@@ -17,10 +17,6 @@ const styles = theme => ({
     height: 'calc(100% - 64px)',
     top: 64,
     width: drawerWidth,
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
   },
 });
 

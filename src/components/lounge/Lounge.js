@@ -10,6 +10,12 @@ const styles = theme => ({
     padding: theme.spacing.unit * 3,
     height: '100vh',
   },
+  input: {
+    position: 'fixed',
+    bottom: 20,
+    right: 20,
+    left:340
+  }
 });
 
 class Lounge extends React.Component {
@@ -33,11 +39,12 @@ class Lounge extends React.Component {
           donec massa sapien faucibus et molestie ac.
         </Typography>
         <TextField
+          className={classes.input}
           id="outlined-full-width"
           label="Label"
-          
           placeholder="Placeholder"
-          fullWidth
+          multiline
+          rows="3"
           margin="normal"
           variant="outlined"
           InputLabelProps={{
