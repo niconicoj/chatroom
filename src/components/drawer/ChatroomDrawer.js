@@ -8,7 +8,7 @@ import { CreateChatroomButton } from './CreateChatroomButton';
 import { ChatList } from './chatlist/ChatList';
 
 
-const drawerWidth = 320;
+const drawerWidth = 340;
 
 const styles = theme => ({
   drawerPaper: {

@@ -1,8 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
+import Divider from '@material-ui/core/Divider';
+
+import MessageField from '../messagefield/MessageField';
+import Message from '../message/Message';
 
 const styles = theme => ({
   appBarSpacer: theme.mixins.toolbar,
@@ -10,12 +13,6 @@ const styles = theme => ({
     padding: theme.spacing.unit * 3,
     height: '100vh',
   },
-  input: {
-    position: 'fixed',
-    bottom: 20,
-    right: 20,
-    left:340
-  }
 });
 
 class Lounge extends React.Component {
@@ -26,31 +23,17 @@ class Lounge extends React.Component {
     return (
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
-        <Typography paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-          ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum
-          facilisis leo vel. Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit
-          gravida rutrum quisque non tellus. Convallis convallis tellus id interdum velit laoreet id
-          donec ultrices. Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-          adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra nibh cras.
-          Metus vulputate eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo quis
-          imperdiet massa tincidunt. Cras tincidunt lobortis feugiat vivamus at augue. At augue eget
-          arcu dictum varius duis at consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem
-          donec massa sapien faucibus et molestie ac.
-        </Typography>
-        <TextField
-          className={classes.input}
-          id="outlined-full-width"
-          label="Label"
-          placeholder="Placeholder"
-          multiline
-          rows="3"
-          margin="normal"
-          variant="outlined"
-          InputLabelProps={{
-            shrink: true,
-          }}
-        />
+        <Grid
+          container
+          direction="column"
+          justify="flex-end"
+          alignItems="baseline"
+          className={{bottom:0}}
+        >
+          <Message />
+        </Grid>
+
+        <MessageField />
       </main>
     )
   }
