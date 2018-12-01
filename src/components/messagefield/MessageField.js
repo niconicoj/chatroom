@@ -6,18 +6,22 @@ import Fab from '@material-ui/core/Fab';
 import Send from '@material-ui/icons/Send';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
+import Paper from '@material-ui/core/Paper';
 
 const styles = theme => ({
   input: {
     position: 'fixed',
     bottom: 0,
     right: 0,
-    left:360,
+    left:340,
     paddingBottom: 12,
-    backgroundColor: theme.palette.background.paper
+    backgroundColor: theme.palette.background.paper,
   },
-  inputGrid: {
-    padding: 0,
+  inputField: {
+    paddingLeft: '32px !important',
+  },
+  inputButton: {
+    paddingLeft: 0,
   }
 });
 
@@ -28,7 +32,7 @@ class MessageField extends React.Component {
     const { classes } = this.props;
 
     return (
-      <div className={classes.input} >
+      <Paper className={classes.input} square elevation={12}>
         <Divider />
         <Grid
           container
@@ -37,7 +41,7 @@ class MessageField extends React.Component {
           justify="center"
           alignItems="center"
         >
-          <Grid item xs={11} className={classes.inputGrid}>
+          <Grid item xs={11} className={classes.inputField}>
             <TextField
               id="outlined-full-width"
               multiline
@@ -49,13 +53,13 @@ class MessageField extends React.Component {
               }}
             />
           </Grid>
-          <Grid item xs={1} className={classes.inputGrid}>
+          <Grid item xs={1} className={classes.inputButton}>
             <Fab color="primary" aria-label="Add">
               <Send />
             </Fab>
           </Grid>
         </Grid>
-      </div>
+      </Paper>
     )
   }
 }
