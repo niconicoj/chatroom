@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Divider from '@material-ui/core/Divider';
 import Paper from '@material-ui/core/Paper';
 
 import MessageField from '../messagefield/MessageField';
@@ -15,7 +13,6 @@ const styles = theme => ({
   },
   content: {
     position: 'absolute',
-    padding: theme.spacing.unit * 3,
     height: '100vh',
     left: 340,
     right: 0,

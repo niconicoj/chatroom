@@ -22,7 +22,7 @@ const styles = theme => ({
     paddingBottom: theme.spacing.unit * 2,
     margin: 20,
     marginLeft: 220,
-    backgroundColor: '#daf5ff',
+    backgroundColor: '#d0e8ff',
     display: 'inline-block',
     right: 0
   },
@@ -53,11 +53,7 @@ class Message extends React.Component {
       >
         <Paper className={styleClass} elevation={0}>
           <Typography className={textColor} component="p">
-            subtitle1. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur
-subtitle2. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur
-body1. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
-
-body2. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
+            subtim beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
           </Typography>
         </Paper>
       </Grid>

@@ -1,11 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import ListSubheader from '@material-ui/core/ListSubheader';
-import List from '@material-ui/core/List';
 import ChatListItem from './ChatListItem';
 
 import { chatroomsActions } from '../../../actions';
-
 
 class ChatList extends React.Component {
 
@@ -24,7 +21,6 @@ class ChatList extends React.Component {
 		  				)}
 	      </div>
     )
-
   }
 }
 
@@ -35,8 +31,6 @@ function mapStateToProps(state) {
       chatrooms
     };
 }
-
-
 
 const connectedChatList = connect(mapStateToProps)(ChatList);
 export { connectedChatList as ChatList };
