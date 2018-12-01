@@ -10,9 +10,14 @@ import Divider from '@material-ui/core/Divider';
 const styles = theme => ({
   input: {
     position: 'fixed',
-    bottom: 20,
+    bottom: 0,
     right: 0,
-    left:360
+    left:360,
+    paddingBottom: 12,
+    backgroundColor: theme.palette.background.paper
+  },
+  inputGrid: {
+    padding: 0,
   }
 });
 
@@ -32,7 +37,7 @@ class MessageField extends React.Component {
           justify="center"
           alignItems="center"
         >
-          <Grid item xs={11}>
+          <Grid item xs={11} className={classes.inputGrid}>
             <TextField
               id="outlined-full-width"
               multiline
@@ -44,7 +49,7 @@ class MessageField extends React.Component {
               }}
             />
           </Grid>
-          <Grid item xs={1}>
+          <Grid item xs={1} className={classes.inputGrid}>
             <Fab color="primary" aria-label="Add">
               <Send />
             </Fab>

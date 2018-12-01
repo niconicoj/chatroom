@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
+import List from '@material-ui/core/List';
 import { CreateChatroomButton } from './CreateChatroomButton';
 import { ChatList } from './chatlist/ChatList';
 
@@ -12,12 +13,16 @@ const drawerWidth = 340;
 
 const styles = theme => ({
   drawerPaper: {
-    position: 'relative',
+    position: 'fixed',
     whiteSpace: 'nowrap',
     height: 'calc(100% - 64px)',
     top: 64,
     width: drawerWidth,
   },
+  drawerList: {
+    padding: 0,
+    backgroundColor: theme.palette.background.paper
+  }
 });
 
 class ChatroomDrawer extends React.Component {
@@ -46,10 +51,10 @@ class ChatroomDrawer extends React.Component {
         }}
         open={true}
       >
-        <Divider />
-        <CreateChatroomButton />
-        <Divider />
-        <ChatList />
+        <List className={classes.drawerList}>
+          <CreateChatroomButton />
+          <ChatList />
+        </List>
       </Drawer>
     );
   }

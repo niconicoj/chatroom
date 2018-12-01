@@ -34,7 +34,7 @@ class ChatroomAppBar extends React.Component {
 
     return (
       <AppBar
-        position="absolute"
+        position="fixed"
         className={classNames(classes.appBar)}
       >
         <Toolbar disableGutters={false} className={classes.toolbar}>

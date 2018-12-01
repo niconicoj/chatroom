@@ -10,9 +10,15 @@ import Message from '../message/Message';
 const styles = theme => ({
   appBarSpacer: theme.mixins.toolbar,
   content: {
+    position: 'absolute',
     padding: theme.spacing.unit * 3,
     height: '100vh',
+    left: 360,
+    bottom: 300
   },
+  messageGrid :{
+    marginBottom: 84
+  }
 });
 
 class Lounge extends React.Component {
@@ -28,8 +34,21 @@ class Lounge extends React.Component {
           direction="column"
           justify="flex-end"
           alignItems="baseline"
-          className={{bottom:0}}
+          className={classes.messageGrid}
         >
+          <Message />
+          <Message />
+          <Message />
+          <Message />
+          <Message />
+          <Message />
+          <Message />
+          <Message />
+          <Message />
+          <Message />
+          <Message />
+          <Message />
+          <Message />
           <Message />
         </Grid>
 

@@ -18,14 +18,11 @@ class ChatList extends React.Component {
   	const { chatrooms } = this.props;
 
     return (
-	    <List>
 	      <div>
-	        <ListSubheader inset>Chatrooms</ListSubheader>
 	        	{chatrooms && this.props.chatrooms.map((chatroom) =>
 								<ChatListItem key={chatroom._id} name={chatroom.name} isFavorite={false} />
 		  				)}
 	      </div>
-	    </List>
     )
 
   }
