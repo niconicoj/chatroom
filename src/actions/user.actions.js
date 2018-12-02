@@ -1,5 +1,6 @@
 import { userConstants } from '../constants';
 import { alertActions } from './';
+import { history } from '../helpers';
 
 export const userActions = {
   enterChatroom

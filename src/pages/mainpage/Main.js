@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import { withStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -10,7 +11,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import ChatroomDrawer from '../../components/drawer/ChatroomDrawer';
 import ChatroomAppBar from '../../components/appbar/ChatroomAppBar';
 import Lounge from '../../components/lounge/Lounge';
-import Home from '../../components/home/Home';
+import { Home } from '../../components/home/Home';
 import { FeedbackSnackbar } from '../../components/feedbacksnackbar/FeedbackSnackbar';
 
 const styles = theme => ({
@@ -41,24 +42,25 @@ class Main extends React.Component {
 
     const { classes, user } = this.props;
 
-    const page = ( ( user.currentChatroom && <Lounge id={user.currentChatroom} /> ) || ( <Home /> ) )
-
     return (
-      <div className={classes.root}>
-        <CssBaseline />
-        <ChatroomAppBar />
-        <ChatroomDrawer />
-        {page}
-        <Modal
-          aria-labelledby="simple-modal-title"
-          aria-describedby="simple-modal-description"
-          open={this.state.loading}
-          onClose={this.handleClose}
-        >
-          <CircularProgress className={classes.progress} size={200} color="secondary"/>
-        </Modal>
-        <FeedbackSnackbar />
-      </div>
+      <Router>
+        <div className={classes.root}>
+          <CssBaseline />
+          <ChatroomAppBar />
+          <ChatroomDrawer />
+          <Route exact path="/" component={Home} />
+          <Route path="/chatroom" component={Lounge} />
+          <Modal
+            aria-labelledby="simple-modal-title"
+            aria-describedby="simple-modal-description"
+            open={this.state.loading}
+            onClose={this.handleClose}
+          >
+            <CircularProgress className={classes.progress} size={200} color="secondary"/>
+          </Modal>
+          <FeedbackSnackbar />
+        </div>
+      </Router>
     );
   }
 }

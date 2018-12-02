@@ -45,7 +45,7 @@ class ChatroomAppBar extends React.Component {
             noWrap
             className={classes.title}
           >
-            Chatroom
+            <a href ='/'>Chatroom</a>
           </Typography>
           <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">

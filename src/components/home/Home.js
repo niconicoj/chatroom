@@ -1,5 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 
@@ -33,7 +35,11 @@ const styles = theme => ({
 class Home extends React.Component {
   
   render () {
-    const { classes } = this.props;
+    const { classes, user } = this.props;
+
+    if (user.currentChatroom) {
+      return <Redirect to={{ pathname: "/chatroom", search: `?id=${user.currentChatroom}` }}/>;
+    }
 
     return (
       <main className={classes.content}>
@@ -53,9 +59,17 @@ class Home extends React.Component {
   }
 }
 
+function mapStateToProps(state) {
+    const { user } = state;
+    return {
+        user
+    };
+}
+
 Home.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Home);
+const connectedHome = connect(mapStateToProps)( withStyles(styles)(Home));
+export { connectedHome as Home };
 
