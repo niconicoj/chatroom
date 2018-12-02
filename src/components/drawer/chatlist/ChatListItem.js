@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -8,6 +10,8 @@ import StarBorderRounded from '@material-ui/icons/StarBorderRounded';
 import StarRounded from '@material-ui/icons/StarRounded';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import IconButton from '@material-ui/core/IconButton';
+
+import { userActions } from '../../../actions';
 
 const drawerWidth = 240;
 
@@ -27,14 +31,24 @@ const styles = theme => ({
 
 class ChatListItem extends React.Component {
 
+  handleClick = () => {
+    console.log(this.props.id);
+    this.props.dispatch(userActions.enterChatroom(this.props.id));
+  }
+
   render () {
 
-    const { name, isFavorite } = this.props;
+    const { name, isFavorite, id } = this.props;
+
+    console.log(id);
 
     const favorite = ( ( isFavorite && <StarRounded color="secondary" /> ) || <StarBorderRounded /> );
 
     return (
-      <ListItem button>
+      <ListItem 
+        button
+        onClick={this.handleClick}
+      >
         <ListItemIcon>
           <CommentIcon />
         </ListItemIcon>
@@ -49,4 +63,11 @@ class ChatListItem extends React.Component {
   }
 }
 
-export default withStyles(styles)(ChatListItem);
+function mapStateToProps(state) {
+  const { chatrooms } = state;
+    return {
+      chatrooms
+    };
+}
+const connectedChatListItem = connect(mapStateToProps)(withStyles(styles)(ChatListItem));
+export { connectedChatListItem as ChatListItem }; 

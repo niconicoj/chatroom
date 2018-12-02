@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import ChatListItem from './ChatListItem';
+import { ChatListItem } from './ChatListItem';
 
 import { chatroomsActions } from '../../../actions';
 
@@ -17,7 +17,7 @@ class ChatList extends React.Component {
     return (
 	      <div>
 	        	{chatrooms && this.props.chatrooms.map((chatroom) =>
-								<ChatListItem key={chatroom._id} name={chatroom.name} isFavorite={false} />
+								<ChatListItem id={chatroom._id} key={chatroom._id} name={chatroom.name} isFavorite={false} />
 		  				)}
 	      </div>
     )

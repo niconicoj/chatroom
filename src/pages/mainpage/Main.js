@@ -10,6 +10,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import ChatroomDrawer from '../../components/drawer/ChatroomDrawer';
 import ChatroomAppBar from '../../components/appbar/ChatroomAppBar';
 import Lounge from '../../components/lounge/Lounge';
+import Home from '../../components/home/Home';
 import { FeedbackSnackbar } from '../../components/feedbacksnackbar/FeedbackSnackbar';
 
 const styles = theme => ({
@@ -25,20 +26,6 @@ const styles = theme => ({
     left: 0,
     right: 0
   },
-  close: {
-    padding: theme.spacing.unit / 2,
-  },
-  error: {
-    backgroundColor: theme.palette.error.dark,
-  },
-  message: {
-    display: 'flex',
-    alignItems: 'center',
-  },
-  iconVariant: {
-    opacity: 0.9,
-    marginRight: theme.spacing.unit,
-  },
 });
 
 class Main extends React.Component {
@@ -51,14 +38,17 @@ class Main extends React.Component {
   }
 
   render() {
-    const { classes } = this.props;
+
+    const { classes, user } = this.props;
+
+    const page = ( ( user.currentChatroom && <Lounge id={user.currentChatroom} /> ) || ( <Home /> ) )
 
     return (
       <div className={classes.root}>
         <CssBaseline />
         <ChatroomAppBar />
         <ChatroomDrawer />
-        <Lounge />
+        {page}
         <Modal
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
@@ -78,9 +68,10 @@ Main.propTypes = {
 };
 
 function mapStateToProps(state) {
-    const { alert } = state;
+    const { alert, user } = state;
     return {
-        alert
+        alert,
+        user
     };
 }
 

@@ -22,7 +22,7 @@ const styles = theme => ({
     paddingBottom: theme.spacing.unit * 2,
     margin: 20,
     marginLeft: 220,
-    backgroundColor: '#d0e8ff',
+    backgroundColor:theme.palette.primary.light,
     display: 'inline-block',
     right: 0
   },
@@ -37,7 +37,7 @@ const styles = theme => ({
 class Message extends React.Component {
   
   render () {
-    const { classes, sent } = this.props;
+    const { classes, text, sent } = this.props;
 
     const align = ( ( sent && "flex-end" ) || "flex-start" );
 
@@ -53,7 +53,7 @@ class Message extends React.Component {
       >
         <Paper className={styleClass} elevation={0}>
           <Typography className={textColor} component="p">
-            subtim beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
+            {text}
           </Typography>
         </Paper>
       </Grid>
