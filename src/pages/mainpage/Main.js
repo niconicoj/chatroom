@@ -40,7 +40,7 @@ class Main extends React.Component {
 
   render() {
 
-    const { classes } = this.props;
+    const { classes, chatrooms } = this.props;
 
     return (
       <Router>
@@ -53,10 +53,10 @@ class Main extends React.Component {
           <Modal
             aria-labelledby="simple-modal-title"
             aria-describedby="simple-modal-description"
-            open={this.state.loading}
+            open={chatrooms.loading || false}
             onClose={this.handleClose}
           >
-            <CircularProgress className={classes.progress} size={200} color="secondary"/>
+            <CircularProgress className={classes.progress} disableShrink size={200} color="secondary"/>
           </Modal>
           <FeedbackSnackbar />
         </div>
@@ -70,10 +70,11 @@ Main.propTypes = {
 };
 
 function mapStateToProps(state) {
-    const { alert, user } = state;
+    const { alert, user, chatrooms } = state;
     return {
         alert,
-        user
+        user,
+        chatrooms
     };
 }
 
