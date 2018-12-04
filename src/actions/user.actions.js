@@ -1,6 +1,5 @@
 import { userConstants } from '../constants';
-import { alertActions } from './';
-import { history } from '../helpers';
+// import { alertActions } from './';
 
 export const userActions = {
   enterChatroom
@@ -14,5 +13,5 @@ function enterChatroom(chatroom) {
 
   function request(chatroom) { return { type: userConstants.ENTER_CHATROOM_REQUEST, chatroom } }
   function success(chatroom) { return { type: userConstants.ENTER_CHATROOM_SUCCESS, chatroom } }
-  function failure(error) { return { type: userConstants.ENTER_CHATROOM_FAILURE, error } }
+  // function failure(error) { return { type: userConstants.ENTER_CHATROOM_FAILURE, error } }
 }

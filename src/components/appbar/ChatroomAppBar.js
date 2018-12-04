@@ -7,6 +7,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import Badge from '@material-ui/core/Badge';
+import Button from '@material-ui/core/Button';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 
 const styles = theme => ({
@@ -22,6 +23,7 @@ const styles = theme => ({
   },
   title: {
     flexGrow: 1,
+    color: 'white'
   },
 });
 
@@ -38,15 +40,18 @@ class ChatroomAppBar extends React.Component {
         className={classNames(classes.appBar)}
       >
         <Toolbar disableGutters={false} className={classes.toolbar}>
-          <Typography
-            component="h1"
-            variant="h6"
-            color="inherit"
-            noWrap
-            className={classes.title}
-          >
-            <a href ='/'>Chatroom</a>
-          </Typography>
+        <div className={classes.title}>
+          <Button href='/' >
+            <Typography
+              component="h1"
+              variant="h6"
+              color="inherit"
+              noWrap
+              className={classes.title}
+            >Chatroom
+            </Typography>
+          </Button>
+          </div>
           <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
               <NotificationsIcon />

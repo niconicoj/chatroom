@@ -5,7 +5,7 @@ export function user(state = {}, action) {
     case userConstants.ENTER_CHATROOM_REQUEST:
       return {
         ...state,
-        loading: true
+        loading: true,
       };
     case userConstants.ENTER_CHATROOM_SUCCESS:
       return {

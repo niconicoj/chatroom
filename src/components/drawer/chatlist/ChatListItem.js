@@ -32,15 +32,12 @@ const styles = theme => ({
 class ChatListItem extends React.Component {
 
   handleClick = () => {
-    console.log(this.props.id);
     this.props.dispatch(userActions.enterChatroom(this.props.id));
   }
 
   render () {
 
-    const { name, isFavorite, id } = this.props;
-
-    console.log(id);
+    const { name, isFavorite } = this.props;
 
     const favorite = ( ( isFavorite && <StarRounded color="secondary" /> ) || <StarBorderRounded /> );
 

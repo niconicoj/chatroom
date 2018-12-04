@@ -40,7 +40,7 @@ class Main extends React.Component {
 
   render() {
 
-    const { classes, user } = this.props;
+    const { classes } = this.props;
 
     return (
       <Router>

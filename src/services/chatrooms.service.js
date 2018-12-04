@@ -25,12 +25,10 @@ function getAll() {
     method: 'GET',
     headers: authHeader(),
   };
-  console.log(`${config.apiUrl}/chatrooms`);
   return fetch(`${config.apiUrl}/chatrooms`, requestOptions).then(handleResponse);
 }
 
 function handleResponse(response) {
-  console.log(response);
   return response.text().then(text => {
     const data = text && JSON.parse(text);
     if (!response.ok) {
