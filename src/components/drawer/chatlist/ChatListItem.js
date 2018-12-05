@@ -11,7 +11,7 @@ import StarRounded from '@material-ui/icons/StarRounded';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import IconButton from '@material-ui/core/IconButton';
 
-import { userActions } from '../../../actions';
+import { usersActions } from '../../../actions';
 
 const drawerWidth = 240;
 
@@ -32,7 +32,7 @@ const styles = theme => ({
 class ChatListItem extends React.Component {
 
   handleClick = () => {
-    this.props.dispatch(userActions.enterChatroom(this.props.id));
+    this.props.dispatch(usersActions.enterChatroom(this.props.id));
   }
 
   render () {

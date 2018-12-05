@@ -14,6 +14,8 @@ import Lounge from '../../components/lounge/Lounge';
 import { Home } from '../../components/home/Home';
 import { FeedbackSnackbar } from '../../components/feedbacksnackbar/FeedbackSnackbar';
 
+import { usersActions } from '../../actions';
+
 const styles = theme => ({
   root: {
     display: 'flex',
@@ -36,6 +38,10 @@ class Main extends React.Component {
     this.state = {
         loading: false,
     };
+  }
+
+  componentDidMount() {
+    this.props.dispatch(usersActions.registerAsGuest());
   }
 
   render() {
