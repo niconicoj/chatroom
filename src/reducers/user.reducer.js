@@ -1,6 +1,9 @@
 import { userConstants } from '../constants';
 
-export function user(state = {}, action) {
+let localUser = JSON.parse(localStorage.getItem('user'));
+const initialState = localUser ? localUser : {};
+
+export function user(state = initialState, action) {
   switch (action.type) {
 
     case userConstants.ENTER_CHATROOM_REQUEST:

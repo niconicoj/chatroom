@@ -10,7 +10,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 import ChatroomDrawer from '../../components/drawer/ChatroomDrawer';
 import ChatroomAppBar from '../../components/appbar/ChatroomAppBar';
-import Lounge from '../../components/lounge/Lounge';
+import { Lounge } from '../../components/lounge/Lounge';
 import { Home } from '../../components/home/Home';
 import { FeedbackSnackbar } from '../../components/feedbacksnackbar/FeedbackSnackbar';
 
@@ -41,7 +41,8 @@ class Main extends React.Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(usersActions.registerAsGuest());
+    if(!this.props.user)
+      this.props.dispatch(usersActions.registerAsGuest());
   }
 
   render() {

@@ -4,7 +4,8 @@ import { alertActions } from './';
 
 export const chatroomsActions = {
     create,
-    getAll
+    getAll,
+    getChatroomMessages
 };
 
 function create(chatroom) {
@@ -43,4 +44,20 @@ function getAll() {
     function request() { return { type: chatroomsConstants.GETALL_REQUEST } }
     function success(chatrooms) { return { type: chatroomsConstants.GETALL_SUCCESS, chatrooms } }
     function failure(error) { return { type: chatroomsConstants.GETALL_FAILURE, error } }
+}
+
+function getChatroomMessages(chatroom) {
+    return dispatch => {
+        dispatch(request(chatroom));
+
+        chatroomsService.getChatroomMessages(chatroom)
+            .then(
+                messages => dispatch(success(messages)),
+                error => dispatch(failure(error.toString()))
+            );
+    };
+
+    function request(chatroom) { return { type: chatroomsConstants.GET_MESSAGES_REQUEST, chatroom } }
+    function success(messages) { return { type: chatroomsConstants.GET_MESSAGES_SUCCESS, messages } }
+    function failure(error) { return { type: chatroomsConstants.GET_MESSAGES_FAILURE, error } }
 }

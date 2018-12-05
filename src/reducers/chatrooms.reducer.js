@@ -16,6 +16,7 @@ export function chatrooms(state = {}, action) {
       return { 
         ...state,
       };
+
     case chatroomsConstants.GETALL_REQUEST:
       return {
         loading: true
@@ -28,6 +29,24 @@ export function chatrooms(state = {}, action) {
       return { 
         error: action.error
       };
+
+    case chatroomsConstants.GET_MESSAGES_REQUEST:
+      return {
+        ...state,
+        loading: true
+      };
+    case chatroomsConstants.GET_MESSAGES_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        messages: action.messages
+      };
+    case chatroomsConstants.GET_MESSAGES_FAILURE:
+      return { 
+        ...state,
+        error: action.error
+      };
+
     default:
       return state
   }

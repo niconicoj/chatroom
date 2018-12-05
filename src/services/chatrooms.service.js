@@ -3,7 +3,8 @@ import { authHeader } from '../helpers';
 
 export const chatroomsService = {
   create,
-  getAll
+  getAll,
+  getChatroomMessages
 };
 
 function create(name) {
@@ -42,4 +43,12 @@ function handleResponse(response) {
 
     return data;
   });
+}
+
+function getChatroomMessages(chatroomId) {
+  const requestOptions = {
+    method: 'GET',
+    headers: authHeader(),
+  };
+  return fetch(`${config.apiUrl}/chatrooms/${chatroomId}/messages`, requestOptions).then(handleResponse);
 }
