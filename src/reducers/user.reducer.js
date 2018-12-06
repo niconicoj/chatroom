@@ -15,9 +15,26 @@ export function user(state = initialState, action) {
       return {
           ...state,
           loading: false,
-          currentChatroom: action.chatroom
+          inChatroom: action.chatroom
       };
     case userConstants.ENTER_CHATROOM_FAILURE:
+      return { 
+        ...state,
+      };
+
+    case userConstants.LEAVE_CHATROOM_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case userConstants.LEAVE_CHATROOM_SUCCESS:
+
+      const { inChatroom, ...nextState } = state;
+      return {
+          ...nextState,
+          loading: false,
+      };
+    case userConstants.LEAVE_CHATROOM_FAILURE:
       return { 
         ...state,
       };

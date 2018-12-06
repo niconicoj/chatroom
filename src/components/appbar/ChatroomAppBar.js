@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -9,6 +11,8 @@ import IconButton from '@material-ui/core/IconButton';
 import Badge from '@material-ui/core/Badge';
 import Button from '@material-ui/core/Button';
 import NotificationsIcon from '@material-ui/icons/Notifications';
+
+import { usersActions } from '../../actions';
 
 const styles = theme => ({
   toolbar: {
@@ -29,6 +33,9 @@ const styles = theme => ({
 
 class ChatroomAppBar extends React.Component {
 
+  leaveChatroom = () => {
+    this.props.dispatch(usersActions.leaveChatroom());
+  }
 
   render () {
 
@@ -41,15 +48,18 @@ class ChatroomAppBar extends React.Component {
       >
         <Toolbar disableGutters={false} className={classes.toolbar}>
         <div className={classes.title}>
-          <Button href='/' >
-            <Typography
-              component="h1"
-              variant="h6"
-              color="inherit"
-              noWrap
-              className={classes.title}
-            >Chatroom
-            </Typography>
+          <Button onClick={this.leaveChatroom}>
+            <Link to="/" style={{textDecoration: 'none'}}>
+              <Typography
+                component="h1"
+                variant="h6"
+                color="inherit"
+                noWrap
+                className={classes.title}
+              >
+              Chatroom
+              </Typography>
+            </Link>
           </Button>
           </div>
           <IconButton color="inherit">
@@ -67,4 +77,12 @@ ChatroomAppBar.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(ChatroomAppBar);
+function mapStateToProps(state) {
+  const { alert } = state;
+  return {
+    alert
+  };
+}
+
+const connectedChatroomAppBar = connect(mapStateToProps)(withStyles(styles)(ChatroomAppBar));
+export { connectedChatroomAppBar as ChatroomAppBar };

@@ -9,6 +9,8 @@ import MessageField from '../messagefield/MessageField';
 import { MessageFeed } from '../messagefeed/MessageFeed';
 import Message from '../message/Message';
 
+import { usersActions, chatroomsActions } from '../../actions';
+
 const styles = theme => ({
   content: {
     position: 'absolute',
@@ -24,13 +26,23 @@ const styles = theme => ({
 });
 
 class Lounge extends React.Component {
+
+  componentDidMount() {
+    this.props.dispatch(usersActions.enterChatroom(this.props.id));
+    this.props.dispatch(chatroomsActions.getChatroomMessages(this.props.id));
+  }
+
+  componentDidUpdate() {
+    this.props.dispatch(usersActions.enterChatroom(this.props.id));
+    this.props.dispatch(chatroomsActions.getChatroomMessages(this.props.id));
+  }
   
   render () {
     const { classes, user } = this.props;
 
     return (
       <main className={classes.content}>
-        <MessageFeed chatroomId={user.currentChatroom}/>
+        <MessageFeed chatroomId={this.props.id}/>
         <MessageField />
       </main>
     )
@@ -38,10 +50,9 @@ class Lounge extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { alert, user } = state;
+  const { alert } = state;
   return {
-    alert,
-    user
+    alert
   };
 }
 

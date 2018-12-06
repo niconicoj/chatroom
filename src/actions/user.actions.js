@@ -4,7 +4,8 @@ import { alertActions } from './';
 
 export const usersActions = {
   enterChatroom,
-  registerAsGuest
+  registerAsGuest,
+  leaveChatroom
 };
 
 function enterChatroom(chatroom) {
@@ -18,6 +19,16 @@ function enterChatroom(chatroom) {
   // function failure(error) { return { type: userConstants.ENTER_CHATROOM_FAILURE, error } }
 }
 
+function leaveChatroom() {
+  return dispatch => {
+    dispatch(request());
+    dispatch(success());
+  };
+
+  function request() { return { type: userConstants.LEAVE_CHATROOM_REQUEST } }
+  function success() { return { type: userConstants.LEAVE_CHATROOM_SUCCESS } }
+  // function failure(error) { return { type: userConstants.ENTER_CHATROOM_FAILURE, error } }
+}
 
 function registerAsGuest() {
 	return dispatch => {

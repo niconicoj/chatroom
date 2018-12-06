@@ -21,17 +21,12 @@ const styles = theme => ({
 });
 
 class MessageFeed extends React.Component {
-
-  componentDidMount() {
-  	console.log(this.props.chatroomId);
-    this.props.dispatch(chatroomsActions.getChatroomMessages(this.props.chatroomId));
-  }
   
   render () {
     const { classes, messages, user } = this.props;
 
     const messageList = messages && messages.map((message) => {
-    						return <Message key={message._id} text={message.message} sent={message.user == user.name}/>
+    						return <Message key={message._id} text={message.message} sent={message.user === user.name}/>
 							});
 
     return (

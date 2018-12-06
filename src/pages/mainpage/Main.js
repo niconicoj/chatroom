@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 
 import { withStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -9,7 +9,7 @@ import Modal from '@material-ui/core/Modal';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 import ChatroomDrawer from '../../components/drawer/ChatroomDrawer';
-import ChatroomAppBar from '../../components/appbar/ChatroomAppBar';
+import { ChatroomAppBar } from '../../components/appbar/ChatroomAppBar';
 import { Lounge } from '../../components/lounge/Lounge';
 import { Home } from '../../components/home/Home';
 import { FeedbackSnackbar } from '../../components/feedbacksnackbar/FeedbackSnackbar';
@@ -47,7 +47,7 @@ class Main extends React.Component {
 
   render() {
 
-    const { classes, chatrooms } = this.props;
+    const { classes, chatrooms, user } = this.props;
 
     return (
       <Router>
@@ -56,7 +56,12 @@ class Main extends React.Component {
           <ChatroomAppBar />
           <ChatroomDrawer />
           <Route exact path="/" component={Home} />
-          <Route path="/chatroom" component={Lounge} />
+          <Route path="/chatroom/:id" render={
+            ({match}) => (
+              <Lounge id={match.params.id} /> 
+            )
+
+          } />
           <Modal
             aria-labelledby="simple-modal-title"
             aria-describedby="simple-modal-description"

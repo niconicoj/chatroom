@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -31,10 +32,6 @@ const styles = theme => ({
 
 class ChatListItem extends React.Component {
 
-  handleClick = () => {
-    this.props.dispatch(usersActions.enterChatroom(this.props.id));
-  }
-
   render () {
 
     const { name, isFavorite } = this.props;
@@ -42,20 +39,24 @@ class ChatListItem extends React.Component {
     const favorite = ( ( isFavorite && <StarRounded color="secondary" /> ) || <StarBorderRounded /> );
 
     return (
-      <ListItem 
-        button
-        onClick={this.handleClick}
-      >
-        <ListItemIcon>
-          <CommentIcon />
-        </ListItemIcon>
-        <ListItemText primary={name} />
-        <ListItemSecondaryAction>
-          <IconButton aria-label="favorite">
-            {favorite}
-          </IconButton>
-        </ListItemSecondaryAction>
-      </ListItem>
+      <Link to={`/chatroom/${this.props.id}`} style={{textDecoration: 'none'}}>
+        <ListItem 
+          button
+        >
+          <ListItemIcon>
+            <CommentIcon />
+          </ListItemIcon>
+            <ListItemText>
+              {name} 
+            </ListItemText>
+          
+          <ListItemSecondaryAction>
+            <IconButton aria-label="favorite">
+              {favorite}
+            </IconButton>
+          </ListItemSecondaryAction>
+        </ListItem>
+      </Link>
     )
   }
 }
