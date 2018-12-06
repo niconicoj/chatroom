@@ -7,8 +7,6 @@ import Paper from '@material-ui/core/Paper';
 
 import Message from '../message/Message';
 
-import { chatroomsActions } from '../../actions';
-
 const styles = theme => ({
   appBarSpacer: {
     height: 1,

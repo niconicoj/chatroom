@@ -1,5 +1,4 @@
 import { config } from '../config';
-import { authHeader } from '../helpers';
 
 export const usersService = {
   createGuest

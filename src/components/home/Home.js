@@ -51,7 +51,12 @@ class Home extends React.Component {
             This is a personal project of mine where I set for myself the goal of building a completely usable (and somewhat pleasant to use) chatroom web application.
           </Typography>
           <Typography className={classes.text}>
-            As of now (02/12/2018) the application only gives you the possibility to create a chatroom and see it appear in the left drawer. I'm currently working on the actual look of chat page and hopefully I won't give and we should have a basic chat fonctioning.<br/><br/>
+            As of now (02/12/2018) the application only gives you the possibility to create a chatroom and see it appear in the left drawer. I'm currently working on the actual look of chat page and hopefully I won't give and we should have a basic chat fonctioning.
+          </Typography>
+          <Typography className={classes.text}>
+            (06/12/2018) Made some good progress on this project recently ! I added two end points to my API concerning messages and users, so now Everyone entering the site is automatically given a guest username which is locally stored. I intend on implementing a full signup/login thing in the future. There is also now the possibility to see all the shit test messages I sent in the first chatroom ! 
+          </Typography>
+          <Typography className={classes.text}>
             If you stumbled upon this first I need to ask you "how ?" and second if you happen to know some thing about React Redux and Material UI feel free to look at the actual source code at <a href="https://github.com/niconicoj/chatroom">https://github.com/niconicoj/chatroom</a>. I would be interested in any kind of feedback. 
           </Typography>
       </main>

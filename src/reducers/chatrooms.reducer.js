@@ -10,6 +10,7 @@ export function chatrooms(state = {}, action) {
     case chatroomsConstants.CREATE_SUCCESS:
       return {
         ...state,
+        loading: false,
         chatrooms: [...state.chatrooms, action.chatroom]
       };
     case chatroomsConstants.CREATE_FAILURE:

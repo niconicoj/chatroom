@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import { withStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -47,7 +47,7 @@ class Main extends React.Component {
 
   render() {
 
-    const { classes, chatrooms, user } = this.props;
+    const { classes, chatrooms } = this.props;
 
     return (
       <Router>
@@ -60,7 +60,6 @@ class Main extends React.Component {
             ({match}) => (
               <Lounge id={match.params.id} /> 
             )
-
           } />
           <Modal
             aria-labelledby="simple-modal-title"

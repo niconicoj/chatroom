@@ -3,11 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
 
 import MessageField from '../messagefield/MessageField';
 import { MessageFeed } from '../messagefeed/MessageFeed';
-import Message from '../message/Message';
 
 import { usersActions, chatroomsActions } from '../../actions';
 
@@ -38,7 +36,7 @@ class Lounge extends React.Component {
   }
   
   render () {
-    const { classes, user } = this.props;
+    const { classes } = this.props;
 
     return (
       <main className={classes.content}>

@@ -12,8 +12,6 @@ import StarRounded from '@material-ui/icons/StarRounded';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import IconButton from '@material-ui/core/IconButton';
 
-import { usersActions } from '../../../actions';
-
 const drawerWidth = 240;
 
 const styles = theme => ({
