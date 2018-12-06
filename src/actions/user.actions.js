@@ -38,7 +38,7 @@ function registerAsGuest() {
       user => { 
       		localStorage.setItem('user', JSON.stringify(user));
           dispatch(success(user));
-          dispatch(alertActions.success('Guest created !'));
+          dispatch(alertActions.success('Welcome !'));
       },
       error => {
           dispatch(failure(error.toString()));

@@ -41,7 +41,7 @@ class Main extends React.Component {
   }
 
   componentDidMount() {
-    if(!this.props.user)
+    if(!this.props.user.hasOwnProperty('name'))
       this.props.dispatch(usersActions.registerAsGuest());
   }
 
