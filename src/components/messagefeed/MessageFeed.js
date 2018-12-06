@@ -21,6 +21,7 @@ const styles = theme => ({
 class MessageFeed extends React.Component {
   
   render () {
+
     const { classes, messages, user } = this.props;
 
     const messageList = messages && messages.map((message) => {

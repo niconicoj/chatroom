@@ -10,6 +10,11 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import AddCircle from '@material-ui/icons/AddCircle';
 import Divider from '@material-ui/core/Divider';
+import Search from '@material-ui/icons/Search';
+import TextField from '@material-ui/core/TextField';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
 
 import CreateChatroomDialog from './CreateChatroomDialog';
 import { chatroomsActions } from '../../actions';
@@ -20,8 +25,7 @@ const styles = theme => ({
     backgroundColor: 'inherit'
   },
   stickyHeader: {
-    paddingTop: 0,
-    paddingBottom: 0
+    color: '#747474'
   }
 });
 
@@ -73,9 +77,29 @@ class CreateChatroomButton extends React.Component {
             </ListItemIcon>
             <ListItemText primary="Create Chatroom" />
           </ListItem>
-          <Divider />
-          <ListItem className={classes.stickyHeader} component="div">
-          Chatrooms
+          <ListItem>
+            <TextField
+              id="outlined-adornment-password"
+              variant="outlined"
+              type='text'
+              label="Search a chatroom"
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="Toggle password visibility"
+                    >
+                      <Search />
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
+          </ListItem>
+          <ListItem component="div">
+          <Typography variant="h6" className={classes.stickyHeader}>
+            Chatrooms
+          </Typography>
           </ListItem>
           <Divider />
           <CreateChatroomDialog
