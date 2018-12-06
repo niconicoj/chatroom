@@ -77,7 +77,7 @@ class CreateChatroomButton extends React.Component {
             </ListItemIcon>
             <ListItemText primary="Create Chatroom" />
           </ListItem>
-          <ListItem>
+          <ListItem component="div">
             <TextField
               id="outlined-adornment-password"
               variant="outlined"
