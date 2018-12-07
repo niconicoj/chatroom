@@ -7,6 +7,7 @@ import Send from '@material-ui/icons/Send';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 import Paper from '@material-ui/core/Paper';
+import InputAdornment from '@material-ui/core/InputAdornment';
 
 const styles = theme => ({
   input: {
@@ -17,11 +18,16 @@ const styles = theme => ({
     paddingBottom: 12,
     backgroundColor: theme.palette.background.paper,
   },
-  inputField: {
+  inputGrid: {
     paddingLeft: '32px !important',
+    paddingRight: '32px !important'
   },
   inputButton: {
     paddingLeft: 0,
+  },
+  inputField: {
+    paddingTop: 28.5,
+    paddingBottom: 28.5
   }
 });
 
@@ -41,22 +47,24 @@ class MessageField extends React.Component {
           justify="center"
           alignItems="center"
         >
-          <Grid item xs={11} className={classes.inputField}>
+          <Grid item xs={12} className={classes.inputGrid}>
             <TextField
               id="outlined-full-width"
               multiline
               fullWidth
               margin="normal"
               variant="outlined"
-              InputLabelProps={{
-                shrink: true,
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <Fab color="primary" aria-label="Add">
+                      <Send />
+                    </Fab>
+                  </InputAdornment>
+                ),
+                className: (classes.inputField)
               }}
             />
-          </Grid>
-          <Grid item xs={1} className={classes.inputButton}>
-            <Fab color="primary" aria-label="Add">
-              <Send />
-            </Fab>
           </Grid>
         </Grid>
       </Paper>

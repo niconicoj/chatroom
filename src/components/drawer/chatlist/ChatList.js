@@ -12,24 +12,31 @@ class ChatList extends React.Component {
 
   render () {
 
-  	const { chatrooms } = this.props;
+  	const { chatrooms, chatroomFilter } = this.props;
+
+    const filteredChatroom = chatrooms && this.props.chatrooms.filter((chatroom) => {
+                if ((typeof chatroomFilter) === 'undefined') return true;
+                return chatroom.name.includes(chatroomFilter);
+              });
+
+    console.log(filteredChatroom);
 
     return (
-	      <div>
-	        	{chatrooms && this.props.chatrooms.map((chatroom) =>
-								<ChatListItem id={chatroom._id} key={chatroom._id} name={chatroom.name} isFavorite={false} />
-		  				)}
-	      </div>
+      <div>
+        {chatrooms && filteredChatroom.map((chatroom) =>
+          <ChatListItem id={chatroom._id} key={chatroom._id} name={chatroom.name} isFavorite={false} />
+        )}
+      </div>
     )
   }
 }
 
 function mapStateToProps(state) {
-    const { chatrooms } = state.chatrooms;
-
-    return {
-      chatrooms
-    };
+  const { chatrooms, chatroomFilter } = state.chatrooms;
+  return {
+    chatrooms,
+    chatroomFilter
+  };
 }
 
 const connectedChatList = connect(mapStateToProps)(ChatList);

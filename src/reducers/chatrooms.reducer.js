@@ -24,10 +24,27 @@ export function chatrooms(state = {}, action) {
       };
     case chatroomsConstants.GETALL_SUCCESS:
       return {
+        ...state,
+        loading: false,
         chatrooms: action.chatrooms.message
       };
     case chatroomsConstants.GETALL_FAILURE:
       return { 
+        error: action.error
+      };
+
+    case chatroomsConstants.FILTER_REQUEST:
+      return {
+        ...state,
+      };
+    case chatroomsConstants.FILTER_SUCCESS:
+      return {
+        ...state,
+        chatroomFilter: action.filter
+      };
+    case chatroomsConstants.FILTER_FAILURE:
+      return { 
+        ...state,
         error: action.error
       };
 

@@ -51,6 +51,11 @@ class CreateChatroomButton extends React.Component {
     this.setState({ [name]: value });
   }
 
+  handleFilter = (e) => {
+    const { name, value } = e.target;
+    this.props.dispatch(chatroomsActions.filterChatrooms(value));
+  }
+
   handleCreate = () => {
     this.props.dispatch(chatroomsActions.create(this.state.chatroomName));
     this.handleClose();
@@ -83,6 +88,7 @@ class CreateChatroomButton extends React.Component {
               variant="outlined"
               type='text'
               label="Search a chatroom"
+              onChange={this.handleFilter}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
