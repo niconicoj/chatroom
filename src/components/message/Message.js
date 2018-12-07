@@ -60,8 +60,6 @@ class Message extends React.Component {
 
     var localRelativeTime = moment.utc(time).toDate();
 
-    console.log(localRelativeTime);
-
     return (
       <Grid container
         direction="column"
@@ -74,7 +72,7 @@ class Message extends React.Component {
           </Typography>
         </Paper>
         <Typography variant="caption" className={classes.info}>
-          {sender}, <Moment tz="Europe/Paris" locale="fr" interval={5} fromNow date={localRelativeTime} />
+          {sender}, <Moment tz="Europe/Paris" locale="fr" interval={5} fromNow ago date={localRelativeTime} />
         </Typography>
       </Grid>
     )
