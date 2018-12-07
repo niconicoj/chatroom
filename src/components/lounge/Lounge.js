@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { withStyles } from '@material-ui/core/styles';
 
-import MessageField from '../messagefield/MessageField';
+import { MessageField } from '../messagefield/MessageField';
 import { MessageFeed } from '../messagefeed/MessageFeed';
 
 import { usersActions, chatroomsActions } from '../../actions';

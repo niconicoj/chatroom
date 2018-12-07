@@ -13,7 +13,7 @@ const styles = theme => ({
     display: 'block',
   },
   chat: {
-    marginBottom: 92,
+    marginBottom: 132,
     boxShadow: 'none'
   }
 });

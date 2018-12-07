@@ -65,6 +65,21 @@ export function chatrooms(state = {}, action) {
         error: action.error
       };
 
+    case chatroomsConstants.SEND_MESSAGE_REQUEST:
+      return {
+        ...state
+      };
+    case chatroomsConstants.SEND_MESSAGE_SUCCESS:
+      return {
+        ...state,
+        messages: [...state.messages, action.message]
+      };
+    case chatroomsConstants.SEND_MESSAGE_FAILURE:
+      return { 
+        ...state,
+        error: action.error
+      };
+
     default:
       return state
   }

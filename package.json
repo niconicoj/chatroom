@@ -6,6 +6,7 @@
     "@material-ui/core": "latest",
     "@material-ui/icons": "^3.0.1",
     "history": "^4.7.2",
+    "moment": "^2.22.2",
     "moment-timezone": "^0.5.23",
     "prop-types": "latest",
     "react": "^16.6.3",

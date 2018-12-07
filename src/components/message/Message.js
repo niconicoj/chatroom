@@ -1,6 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Moment from 'react-moment';
+import moment from 'moment/min/moment-with-locales';
+import 'moment/locale/fr';
+import 'moment-timezone';
+
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
@@ -33,6 +37,7 @@ const styles = theme => ({
     marginTop: 0,
     marginBottom: 0,
     margin: 20,
+    color: '#747474'
   },
   textReceived: {
     color: 'white'
@@ -53,6 +58,10 @@ class Message extends React.Component {
 
     const textColor = ( ( sent && classes.textSent ) || classes.textReceived );
 
+    var localRelativeTime = moment.utc(time).toDate();
+
+    console.log(localRelativeTime);
+
     return (
       <Grid container
         direction="column"
@@ -65,7 +74,7 @@ class Message extends React.Component {
           </Typography>
         </Paper>
         <Typography variant="caption" className={classes.info}>
-          {sender}, <Moment interval={5} fromNow date={time} />
+          {sender}, <Moment tz="Europe/Paris" locale="fr" interval={5} fromNow date={localRelativeTime} />
         </Typography>
       </Grid>
     )

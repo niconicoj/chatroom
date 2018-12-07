@@ -52,7 +52,7 @@ class CreateChatroomButton extends React.Component {
   }
 
   handleFilter = (e) => {
-    const { name, value } = e.target;
+    const { value } = e.target;
     this.props.dispatch(chatroomsActions.filterChatrooms(value));
   }
 

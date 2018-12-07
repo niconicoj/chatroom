@@ -19,8 +19,6 @@ class ChatList extends React.Component {
                 return chatroom.name.includes(chatroomFilter);
               });
 
-    console.log(filteredChatroom);
-
     return (
       <div>
         {chatrooms && filteredChatroom.map((chatroom) =>

@@ -4,7 +4,8 @@ import { authHeader } from '../helpers';
 export const chatroomsService = {
   create,
   getAll,
-  getChatroomMessages
+  getChatroomMessages,
+  sendMessage
 };
 
 function create(name) {
@@ -29,6 +30,31 @@ function getAll() {
   return fetch(`${config.apiUrl}/chatrooms`, requestOptions).then(handleResponse);
 }
 
+function getChatroomMessages(chatroomId) {
+  const requestOptions = {
+    method: 'GET',
+    headers: authHeader(),
+  };
+  return fetch(`${config.apiUrl}/chatrooms/${chatroomId}/messages`, requestOptions).then(handleResponse);
+}
+
+function sendMessage(text, user, chatroom) {
+  console.log(text);
+  console.log(user);
+  console.log(chatroom);
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ "message": text, "user": user, "chatroom": chatroom })
+  };
+
+  return fetch(`${config.apiUrl}/chatrooms/${chatroom}/messages`, requestOptions)
+    .then(handleResponse)
+    .then(message => {
+      return message;
+    });
+}
+
 function handleResponse(response) {
   return response.text().then(text => {
     const data = text && JSON.parse(text);
@@ -43,12 +69,4 @@ function handleResponse(response) {
 
     return data;
   });
-}
-
-function getChatroomMessages(chatroomId) {
-  const requestOptions = {
-    method: 'GET',
-    headers: authHeader(),
-  };
-  return fetch(`${config.apiUrl}/chatrooms/${chatroomId}/messages`, requestOptions).then(handleResponse);
 }
