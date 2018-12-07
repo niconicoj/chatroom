@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Moment from 'react-moment';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
@@ -12,6 +13,7 @@ const styles = theme => ({
     paddingBottom: theme.spacing.unit * 2,
     margin: 20,
     marginRight: 220,
+    marginBottom: 0,
     backgroundColor: theme.palette.primary.main,
     display: 'inline-block',
     right: 0
@@ -22,9 +24,15 @@ const styles = theme => ({
     paddingBottom: theme.spacing.unit * 2,
     margin: 20,
     marginLeft: 220,
+    marginBottom: 0,
     backgroundColor:theme.palette.primary.light,
     display: 'inline-block',
     right: 0
+  },
+  info: {
+    marginTop: 0,
+    marginBottom: 0,
+    margin: 20,
   },
   textReceived: {
     color: 'white'
@@ -37,7 +45,7 @@ const styles = theme => ({
 class Message extends React.Component {
   
   render () {
-    const { classes, text, sent } = this.props;
+    const { classes, text, sent, time, sender } = this.props;
 
     const align = ( ( sent && "flex-end" ) || "flex-start" );
 
@@ -56,6 +64,9 @@ class Message extends React.Component {
             {text}
           </Typography>
         </Paper>
+        <Typography variant="caption" className={classes.info}>
+          {sender}, <Moment interval={5} fromNow date={time} />
+        </Typography>
       </Grid>
     )
   }

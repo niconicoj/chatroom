@@ -37,7 +37,7 @@ class ChatListItem extends React.Component {
     const favorite = ( ( isFavorite && <StarRounded color="secondary" /> ) || <StarBorderRounded /> );
 
     return (
-      <Link to={`/chatroom/${this.props.id}`} style={{textDecoration: 'none'}}>
+      <Link to={`/chatroom/${this.props.id}`} style={{textDecoration: 'none', color: 'black'}}>
         <ListItem 
           button
         >

@@ -25,7 +25,7 @@ class MessageFeed extends React.Component {
     const { classes, messages, user } = this.props;
 
     const messageList = messages && messages.map((message) => {
-    						return <Message key={message._id} text={message.message} sent={message.user === user.name}/>
+    						return <Message key={message._id} text={message.message} sent={message.user === user.name} time={message.created_at} sender={message.user}/>
 							});
 
     return (
