@@ -19,6 +19,18 @@ const styles = theme => ({
 });
 
 class MessageFeed extends React.Component {
+
+  scrollToBottom = () => {
+    this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+  }
+
+  componentDidMount() {
+    this.scrollToBottom();
+  }
+
+  componentDidUpdate() {
+    this.scrollToBottom();
+  }
   
   render () {
 
@@ -32,6 +44,9 @@ class MessageFeed extends React.Component {
     	<Paper className={classes.chat}>
 			  <div className={classes.appBarSpacer}/>
 			  {messageList}
+         <div style={{ float:"left", clear: "both" }}
+             ref={(el) => { this.messagesEnd = el; }}>
+        </div>
 			</Paper>
     )
   }
