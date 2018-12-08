@@ -1,12 +1,21 @@
 import { config } from '../config';
 import { authHeader } from '../helpers';
 
+import openSocket from 'socket.io-client';
+const socket = openSocket('51.75.252.252:8890');
+
 export const chatroomsService = {
   create,
   getAll,
   getChatroomMessages,
   sendMessage
 };
+
+function subscribeToChatroom(chatroom, cb) {
+  socket.on('newMessage', message => cb(null, message));
+  socket.emit('subscribeToChatroom', chatroom);
+} 
+
 
 function create(name) {
   const requestOptions = {
@@ -35,6 +44,9 @@ function getChatroomMessages(chatroomId) {
     method: 'GET',
     headers: authHeader(),
   };
+  subscribeToChatroom(chatroomId, (err, message) =>{
+    //doshit
+  });
   return fetch(`${config.apiUrl}/chatrooms/${chatroomId}/messages`, requestOptions).then(handleResponse);
 }
 
