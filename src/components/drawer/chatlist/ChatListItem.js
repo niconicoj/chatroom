@@ -12,6 +12,8 @@ import StarRounded from '@material-ui/icons/StarRounded';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import IconButton from '@material-ui/core/IconButton';
 
+import { usersActions } from '../../../actions';
+
 const drawerWidth = 240;
 
 const styles = theme => ({
@@ -30,6 +32,13 @@ const styles = theme => ({
 
 class ChatListItem extends React.Component {
 
+  handleClick = () => {
+    console.log(this.props.user.inChatroom);
+    if((this.props.id !== this.props.user.inChatroom)&&(this.props.user.inChatroom !== undefined)) {
+      this.props.dispatch(usersActions.leaveChatroom());
+    }
+  }
+
   render () {
 
     const { name, isFavorite } = this.props;
@@ -40,6 +49,7 @@ class ChatListItem extends React.Component {
       <Link to={`/chatroom/${this.props.id}`} style={{textDecoration: 'none', color: 'black'}}>
         <ListItem 
           button
+          onClick={this.handleClick}
         >
           <ListItemIcon>
             <CommentIcon />
@@ -60,9 +70,10 @@ class ChatListItem extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { chatrooms } = state;
+  const { chatrooms, user } = state;
     return {
-      chatrooms
+      chatrooms,
+      user
     };
 }
 const connectedChatListItem = connect(mapStateToProps)(withStyles(styles)(ChatListItem));

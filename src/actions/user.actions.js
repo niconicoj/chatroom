@@ -2,15 +2,33 @@ import { userConstants } from '../constants';
 import { usersService } from '../services';
 import { alertActions } from './';
 
+import io from 'socket.io-client';
+
 export const usersActions = {
   enterChatroom,
   registerAsGuest,
   leaveChatroom
 };
 
+const socket = io('51.75.252.252:8890',{ 
+  forceNew: true,
+  autoConnect: false 
+});
+
+function subscribeToChatroom(chatroom, cb) {
+  socket.on('newMessage', message => cb(null, message));
+  socket.emit('subscribeToChatroom', chatroom);
+}
+
 function enterChatroom(chatroom) {
   return dispatch => {
     dispatch(request(chatroom));
+
+    socket.open();
+    subscribeToChatroom(chatroom, (err, message) =>{
+      console.log(JSON.parse(message));
+    });
+
     dispatch(success(chatroom));
   };
 
@@ -22,6 +40,9 @@ function enterChatroom(chatroom) {
 function leaveChatroom() {
   return dispatch => {
     dispatch(request());
+
+    socket.close();
+
     dispatch(success());
   };
 
