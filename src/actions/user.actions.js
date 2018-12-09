@@ -15,7 +15,8 @@ function enterChatroom(chatroom, user) {
     ioSocket.openSocket();
     ioSocket.subscribeToChatroom(chatroom, user, (err, message) =>{
       const json = JSON.parse(message);
-      chatroomsActions.receiveMessage(json);
+      console.log('preparing emit message');
+      dispatch(chatroomsActions.receiveMessage(json));
     });
 
     dispatch(success(chatroom));
