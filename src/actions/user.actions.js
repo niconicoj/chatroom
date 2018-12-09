@@ -1,8 +1,7 @@
 import { userConstants } from '../constants';
 import { usersService } from '../services';
 import { alertActions, chatroomsActions } from './';
-
-import io from 'socket.io-client';
+import { ioSocket } from '../helpers';
 
 export const usersActions = {
   enterChatroom,
@@ -10,28 +9,13 @@ export const usersActions = {
   leaveChatroom
 };
 
-const socket = io('51.75.252.252:8890',{ 
-  autoConnect: false 
-});
-
-function subscribeToChatroom(chatroom, user, cb) {
-  socket.on(`newMessage.${user}`, message => cb(null, message));
-  const json = JSON.stringify({
-    chatroom: chatroom,
-    user: user
-  });
-  socket.emit('subscribeToChatroom', json);
-}
-
 function enterChatroom(chatroom, user) {
   return dispatch => {
     dispatch(request(chatroom));
-
-    socket.open();
-    subscribeToChatroom(chatroom, user, (err, message) =>{
+    ioSocket.openSocket();
+    ioSocket.subscribeToChatroom(chatroom, user, (err, message) =>{
       const json = JSON.parse(message);
-      console.log(json);
-      chatroomsActions.receiveMessage(json.data.message);
+      chatroomsActions.receiveMessage(json);
     });
 
     dispatch(success(chatroom));
@@ -45,9 +29,7 @@ function enterChatroom(chatroom, user) {
 function leaveChatroom() {
   return dispatch => {
     dispatch(request());
-
-    socket.close();
-
+    ioSocket.closeSocket();
     dispatch(success());
   };
 

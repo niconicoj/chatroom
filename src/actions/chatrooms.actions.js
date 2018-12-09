@@ -1,6 +1,7 @@
 import { chatroomsConstants } from '../constants';
 import { chatroomsService } from '../services';
 import { alertActions } from './';
+import { ioSocket } from '../helpers';
 
 export const chatroomsActions = {
   create,
@@ -68,10 +69,12 @@ function getChatroomMessages(chatroom) {
 function sendMessages(text, user, chatroom) {
   return dispatch => {
     dispatch(request());
-
     chatroomsService.sendMessage(text, user, chatroom)
     .then(
-      message => dispatch(success(message)),
+      message => {
+        dispatch(success(message));
+        ioSocket.emitMessage(message);
+      },
       error => dispatch(failure(error.toString()))
       );
   };
@@ -84,6 +87,7 @@ function sendMessages(text, user, chatroom) {
 function receiveMessage(message) {
   return dispatch => {
     dispatch(request());
+    console.log(message);
     dispatch(success(message));
   };
 
