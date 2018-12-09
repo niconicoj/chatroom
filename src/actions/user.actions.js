@@ -14,17 +14,21 @@ const socket = io('51.75.252.252:8890',{
   autoConnect: false 
 });
 
-function subscribeToChatroom(chatroom, cb) {
-  socket.on('newMessage', message => cb(null, message));
-  socket.emit('subscribeToChatroom', chatroom);
+function subscribeToChatroom(chatroom, user, cb) {
+  socket.on(`newMessage.${user}`, message => cb(null, message));
+  const json = JSON.stringify({
+    chatroom: chatroom,
+    user: user
+  });
+  socket.emit('subscribeToChatroom', json);
 }
 
-function enterChatroom(chatroom) {
+function enterChatroom(chatroom, user) {
   return dispatch => {
     dispatch(request(chatroom));
 
     socket.open();
-    subscribeToChatroom(chatroom, (err, message) =>{
+    subscribeToChatroom(chatroom, user, (err, message) =>{
       const json = JSON.parse(message);
       console.log(json);
       chatroomsActions.receiveMessage(json.data.message);

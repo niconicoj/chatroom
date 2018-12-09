@@ -33,10 +33,10 @@ const styles = theme => ({
 class ChatListItem extends React.Component {
 
   handleClick = () => {
-    console.log(this.props.user.inChatroom);
     if((this.props.id !== this.props.user.inChatroom)&&(this.props.user.inChatroom !== undefined)) {
       this.props.dispatch(usersActions.leaveChatroom());
     }
+    this.props.dispatch(usersActions.enterChatroom(this.props.id, this.props.user._id));
   }
 
   render () {

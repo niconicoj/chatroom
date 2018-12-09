@@ -26,12 +26,10 @@ const styles = theme => ({
 class Lounge extends React.Component {
 
   componentDidMount() {
-    this.props.dispatch(usersActions.enterChatroom(this.props.id));
     this.props.dispatch(chatroomsActions.getChatroomMessages(this.props.id));
   }
 
   componentDidUpdate() {
-    this.props.dispatch(usersActions.enterChatroom(this.props.id));
     this.props.dispatch(chatroomsActions.getChatroomMessages(this.props.id));
   }
   
