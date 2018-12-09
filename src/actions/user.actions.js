@@ -1,6 +1,6 @@
 import { userConstants } from '../constants';
 import { usersService } from '../services';
-import { alertActions } from './';
+import { alertActions, chatroomsActions } from './';
 
 import io from 'socket.io-client';
 
@@ -11,7 +11,6 @@ export const usersActions = {
 };
 
 const socket = io('51.75.252.252:8890',{ 
-  forceNew: true,
   autoConnect: false 
 });
 
@@ -26,7 +25,9 @@ function enterChatroom(chatroom) {
 
     socket.open();
     subscribeToChatroom(chatroom, (err, message) =>{
-      console.log(JSON.parse(message));
+      const json = JSON.parse(message);
+      console.log(json);
+      chatroomsActions.receiveMessage(json.data.message);
     });
 
     dispatch(success(chatroom));

@@ -71,10 +71,24 @@ export function chatrooms(state = {}, action) {
       };
     case chatroomsConstants.SEND_MESSAGE_SUCCESS:
       return {
+        ...state
+      };
+    case chatroomsConstants.SEND_MESSAGE_FAILURE:
+      return { 
+        ...state,
+        error: action.error
+      };
+
+    case chatroomsConstants.RECEIVE_MESSAGE_REQUEST:
+      return {
+        ...state
+      };
+    case chatroomsConstants.RECEIVE_MESSAGE_SUCCESS:
+      return {
         ...state,
         messages: [...state.messages, action.message]
       };
-    case chatroomsConstants.SEND_MESSAGE_FAILURE:
+    case chatroomsConstants.RECEIVE_MESSAGE_FAILURE:
       return { 
         ...state,
         error: action.error

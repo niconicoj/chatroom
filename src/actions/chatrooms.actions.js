@@ -7,7 +7,8 @@ export const chatroomsActions = {
   getAll,
   getChatroomMessages,
   filterChatrooms,
-  sendMessages
+  sendMessages,
+  receiveMessage
 };
 
 function create(chatroom) {
@@ -78,6 +79,16 @@ function sendMessages(text, user, chatroom) {
   function request() { return { type: chatroomsConstants.SEND_MESSAGE_REQUEST} }
   function success(message) { return { type: chatroomsConstants.SEND_MESSAGE_SUCCESS, message } }
   function failure(error) { return { type: chatroomsConstants.SEND_MESSAGE_FAILURE, error } }
+}
+
+function receiveMessage(message) {
+  return dispatch => {
+    dispatch(request());
+    dispatch(success(message));
+  };
+
+  function request() { return { type: chatroomsConstants.RECEIVE_MESSAGE_REQUEST } }
+  function success(message) { return { type: chatroomsConstants.RECEIVE_MESSAGE_SUCCESS, message } }
 }
 
 function filterChatrooms(filter) {
