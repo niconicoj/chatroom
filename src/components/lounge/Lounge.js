@@ -7,7 +7,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { MessageField } from '../messagefield/MessageField';
 import { MessageFeed } from '../messagefeed/MessageFeed';
 
-import { chatroomsActions } from '../../actions';
+import { chatroomsActions, usersActions } from '../../actions';
 
 const styles = theme => ({
   content: {
@@ -29,6 +29,10 @@ const styles = theme => ({
 class Lounge extends React.Component {
 
   componentDidMount() {
+    if ( this.props.user.inChatroom === undefined ){
+      this.props.dispatch(usersActions.enterChatroom(this.props.id));
+      return;
+    }
     this.props.dispatch(chatroomsActions.getChatroomMessages(this.props.id));
   }
 
@@ -49,9 +53,10 @@ class Lounge extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { alert } = state;
+  const { alert, user } = state;
   return {
-    alert
+    alert,
+    user
   };
 }
 

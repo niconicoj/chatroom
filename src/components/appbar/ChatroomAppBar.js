@@ -11,7 +11,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Badge from '@material-ui/core/Badge';
 import Button from '@material-ui/core/Button';
-import NotificationsIcon from '@material-ui/icons/Notifications';
+import AccountCircle from '@material-ui/icons/AccountCircle';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import Hidden from '@material-ui/core/Hidden';
@@ -112,9 +112,7 @@ class ChatroomAppBar extends React.Component {
             </Button>
             </div>
             <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
-              </Badge>
+              <AccountCircle style={{ fontSize: 30 }} />
             </IconButton>
           </Toolbar>
         </AppBar>
