@@ -6,7 +6,8 @@ import { ioSocket } from '../helpers';
 export const usersActions = {
   enterChatroom,
   registerAsGuest,
-  leaveChatroom
+  leaveChatroom,
+  verifyUser
 };
 
 function enterChatroom(chatroom, user) {
@@ -39,6 +40,26 @@ function leaveChatroom() {
   // function failure(error) { return { type: userConstants.ENTER_CHATROOM_FAILURE, error } }
 }
 
+function verifyUser(id) {
+  return dispatch => {
+    dispatch(request());
+
+    usersService.getUser(id).then(
+      user => { 
+          dispatch(success(user));
+      },
+      error => {
+          dispatch(failure(error.toString()));
+          dispatch(registerAsGuest());
+      }
+    );
+  };
+
+  function request() { return { type: userConstants.VERIFY_REQUEST } }
+  function success(user) { return { type: userConstants.VERIFY_SUCCESS } }
+  function failure(error) { return { type: userConstants.VERIFY_FAILURE } }
+}
+
 function registerAsGuest() {
 	return dispatch => {
     dispatch(request());
@@ -56,7 +77,7 @@ function registerAsGuest() {
     );
   };
 
-  function request() { return { type: userConstants.REGISTER_REQUEST } }
-  function success(user) { return { type: userConstants.REGISTER_SUCCESS, user } }
-  function failure(error) { return { type: userConstants.ENTER_CHATROOM_FAILURE, error } }
+  function request() { return { type: userConstants.REGISTER_GUEST_REQUEST } }
+  function success(user) { return { type: userConstants.REGISTER_GUEST_SUCCESS, user } }
+  function failure(error) { return { type: userConstants.REGISTER_GUEST_FAILURE, error } }
 }

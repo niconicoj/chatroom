@@ -13,7 +13,7 @@ class CreateChatroomDialog extends React.Component {
 
   render () {
 
-  	const { open, onClose, onChange, onKeyPress, onCancel, onCreate, fullScreen } = this.props;
+  	const { open, onClose, onChange, onKeyPress, onCancel, onCreate, fullScreen, error } = this.props;
 
     return (
 	    <Dialog
@@ -28,6 +28,7 @@ class CreateChatroomDialog extends React.Component {
 			      After that you will only need to program a few conversation bots to trick yourself into thinking you have friends.
 			    </DialogContentText>
 			    <TextField
+			    	error={error}
 			      autoFocus
 			      margin="dense"
 			      id="name"
@@ -37,6 +38,7 @@ class CreateChatroomDialog extends React.Component {
 			      name="chatroomName"
 			      onChange={onChange}
 			      onKeyPress={onKeyPress}
+			      helperText={error ? "Please input a name for your chatroom.":""}
 			    />
 			  </DialogContent>
 			  <DialogActions>

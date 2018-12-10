@@ -35,16 +35,17 @@ class CreateChatroomButton extends React.Component {
 
   state = {
     open: false,
+    error: false,
     chatroomName: ""
-  };
+  }
 
   handleClickOpen = () => {
     this.setState({ open: true });
-  };
+  }
 
   handleClose = () => {
     this.setState({ open: false });
-  };
+  }
 
   handleChange = (e) => {
     const { name, value } = e.target;
@@ -57,13 +58,24 @@ class CreateChatroomButton extends React.Component {
   }
 
   handleCreate = () => {
-    this.props.dispatch(chatroomsActions.create(this.state.chatroomName));
-    this.handleClose();
-  };
+    if ( this.verifyInput() ) {
+      this.props.dispatch(chatroomsActions.create(this.state.chatroomName));
+      this.handleClose();
+    }
+  }
 
   handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
+    if ( ( e.key === 'Enter' ) && ( this.verifyInput() ) ) {
       this.handleCreate();
+    }
+  }
+
+  verifyInput = () => {
+    if (this.state.chatroomName){
+      this.setState({error: true});
+      return false;
+    } else {
+      return true;
     }
   }
 
@@ -109,6 +121,7 @@ class CreateChatroomButton extends React.Component {
           </ListItem>
           <Divider />
           <CreateChatroomDialog
+            error={this.state.error}
             open={this.state.open}
             onClose={this.handleClose}
             onChange={this.handleChange}

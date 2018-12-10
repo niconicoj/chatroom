@@ -1,7 +1,8 @@
 import { config } from '../config';
 
 export const usersService = {
-  createGuest
+  createGuest,
+  getUser
 };
 
 function createGuest() {
@@ -12,6 +13,19 @@ function createGuest() {
   };
 
   return fetch(`${config.apiUrl}/users`, requestOptions)
+    .then(handleResponse)
+    .then(user => {
+      return user;
+    });
+}
+
+function getUser(id) {
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  };
+
+  return fetch(`${config.apiUrl}/users/${id}`, requestOptions)
     .then(handleResponse)
     .then(user => {
       return user;
