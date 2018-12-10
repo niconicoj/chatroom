@@ -8,7 +8,6 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Modal from '@material-ui/core/Modal';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-import ChatroomDrawer from '../../components/drawer/ChatroomDrawer';
 import { ChatroomAppBar } from '../../components/appbar/ChatroomAppBar';
 import { Lounge } from '../../components/lounge/Lounge';
 import { Home } from '../../components/home/Home';
@@ -54,7 +53,6 @@ class Main extends React.Component {
         <div className={classes.root}>
           <CssBaseline />
           <ChatroomAppBar />
-          <ChatroomDrawer />
           <Route exact path="/" component={Home} />
           <Route path="/chatroom/:id" render={
             ({match}) => (

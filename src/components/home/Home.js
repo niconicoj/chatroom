@@ -13,7 +13,10 @@ const styles = theme => ({
   content: {
     position: 'absolute',
     height: '100vh',
-    left: 340,
+    [theme.breakpoints.down('xs')]: {
+      left: 0,
+    },
+    left: 320,
     right: 0,
     top: 0,
     bottom: 0,

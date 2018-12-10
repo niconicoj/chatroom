@@ -7,13 +7,16 @@ import { withStyles } from '@material-ui/core/styles';
 import { MessageField } from '../messagefield/MessageField';
 import { MessageFeed } from '../messagefeed/MessageFeed';
 
-import { usersActions, chatroomsActions } from '../../actions';
+import { chatroomsActions } from '../../actions';
 
 const styles = theme => ({
   content: {
     position: 'absolute',
     height: '100vh',
-    left: 340,
+    [theme.breakpoints.down('xs')]: {
+      left: 0,
+    },
+    left: 320,
     right: 0,
     top: 0,
     bottom: 0,

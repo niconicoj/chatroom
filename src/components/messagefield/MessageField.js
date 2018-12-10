@@ -17,7 +17,10 @@ const styles = theme => ({
     position: 'fixed',
     bottom: 0,
     right: 0,
-    left:340,
+    [theme.breakpoints.down('xs')]: {
+      left: 0,
+    },
+    left:320,
     paddingBottom: 12,
     backgroundColor: theme.palette.background.paper,
   },
