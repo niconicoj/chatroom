@@ -16,6 +16,9 @@ const styles = theme => ({
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
     margin: 20,
+    [theme.breakpoints.down('sm')]: {
+      marginRight: 100,
+    },
     marginRight: 220,
     marginBottom: 0,
     backgroundColor: theme.palette.primary.main,
@@ -27,6 +30,9 @@ const styles = theme => ({
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
     margin: 20,
+    [theme.breakpoints.down('sm')]: {
+      marginLeft: 100,
+    },
     marginLeft: 220,
     marginBottom: 0,
     backgroundColor:theme.palette.primary.light,
