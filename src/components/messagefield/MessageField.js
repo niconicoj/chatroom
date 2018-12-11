@@ -27,14 +27,27 @@ const styles = theme => ({
   },
   inputGrid: {
     paddingLeft: '32px !important',
-    paddingRight: '32px !important'
+    paddingRight: '32px !important',
+    [theme.breakpoints.down('xs')]: {
+      height: 94
+    }
   },
   inputButton: {
     paddingLeft: 0,
   },
   inputField: {
     paddingTop: 28.5,
-    paddingBottom: 28.5
+    paddingBottom: 28.5,
+    [theme.breakpoints.down('xs')]: {
+      height: 60,
+      marginTop: -5
+    }
+  },
+  sendIcon: {
+    [theme.breakpoints.down('xs')]: {
+      width: 48,
+      height: 48
+    }
   }
 });
 
@@ -90,8 +103,8 @@ class MessageField extends React.Component {
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
-                    <Fab color="primary" aria-label="Add" onClick={this.handleSend}>
-                      <Send />
+                    <Fab color="primary" aria-label="Add" onClick={this.handleSend} className={classes.sendIcon}>
+                      <Send/>
                     </Fab>
                   </InputAdornment>
                 ),

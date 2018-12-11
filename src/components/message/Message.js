@@ -25,7 +25,8 @@ const styles = theme => ({
     marginBottom: 0,
     backgroundColor: theme.palette.primary.main,
     display: 'inline-block',
-    right: 0
+    right: 0,
+    wordBreak: 'break-word'
   },
   messageSent: {
     ...theme.mixins.gutters(),
@@ -38,8 +39,9 @@ const styles = theme => ({
     marginLeft: 220,
     marginBottom: 0,
     backgroundColor:theme.palette.primary.light,
-    display: 'inline-block',
-    right: 0
+    display: 'flex',
+    right: 0,
+    wordBreak: 'break-word'
   },
   info: {
     marginTop: 0,
@@ -52,20 +54,20 @@ const styles = theme => ({
     left: -32,
     [theme.breakpoints.down('xs')]: {
       left: -24,
-    },
+    }
   },
   badgeSent: {
     top: -22,
     right: -32,
     [theme.breakpoints.down('xs')]: {
       right: -24,
-    },
+    }
   },
   textReceived: {
     color: 'white'
   },
   textSent: {
-    color: 'black'
+    color: 'black',
   },
   avatar: {
     width: 22,
