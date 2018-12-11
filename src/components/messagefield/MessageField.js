@@ -14,6 +14,7 @@ import { chatroomsActions } from '../../actions';
 
 const styles = theme => ({
   input: {
+    zIndex: 2,
     position: 'fixed',
     bottom: 0,
     right: 0,
@@ -52,7 +53,7 @@ class MessageField extends React.Component {
   }
 
   handleSend = () => {
-    this.props.dispatch(chatroomsActions.sendMessages(this.state.message, this.props.user.name, this.props.user.inChatroom));
+    this.props.dispatch(chatroomsActions.sendMessages(this.state.message, this.props.user, this.props.user.inChatroom));
     this.setState({ 'message': "" });
   }
 

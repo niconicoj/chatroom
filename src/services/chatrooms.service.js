@@ -43,7 +43,7 @@ function sendMessage(text, user, chatroom) {
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ "message": text, "user": user, "chatroom": chatroom })
+    body: JSON.stringify({ "message": text, "username": user.name, "userId": user._id, "chatroom": chatroom })
   };
 
   return fetch(`${config.apiUrl}/chatrooms/${chatroom}/messages`, requestOptions)

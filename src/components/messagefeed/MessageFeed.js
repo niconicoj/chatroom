@@ -13,7 +13,8 @@ const styles = theme => ({
     display: 'block',
   },
   chat: {
-    marginBottom: 132,
+    paddingBottom: 20,
+    marginBottom: 112,
     boxShadow: 'none'
   }
 });
@@ -37,7 +38,14 @@ class MessageFeed extends React.Component {
     const { classes, messages, user } = this.props;
 
     const messageList = messages && messages.map((message) => {
-    						return <Message key={message._id} text={message.message} sent={message.user === user.name} time={message.created_at} sender={message.user}/>
+    						return <Message 
+                  key={message._id} 
+                  text={message.message} 
+                  sent={message.username === user.name} 
+                  time={message.created_at} 
+                  sender={message.username}
+                  id={message.userId}
+                />
 							});
 
     return (
