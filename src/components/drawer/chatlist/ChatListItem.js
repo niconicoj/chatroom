@@ -37,6 +37,7 @@ class ChatListItem extends React.Component {
       this.props.dispatch(usersActions.leaveChatroom());
     }
     this.props.dispatch(usersActions.enterChatroom(this.props.id, this.props.user._id));
+    this.props.onClickItem();
   }
 
   render () {

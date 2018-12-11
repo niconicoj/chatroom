@@ -96,7 +96,6 @@ class CreateChatroomButton extends React.Component {
           </ListItem>
           <ListItem component="div">
             <TextField
-              id="outlined-adornment-password"
               variant="outlined"
               type='text'
               label="Search a chatroom"

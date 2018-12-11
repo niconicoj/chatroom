@@ -22,7 +22,7 @@ class ChatList extends React.Component {
     return (
       <div>
         {chatrooms && filteredChatroom.map((chatroom) =>
-          <ChatListItem id={chatroom._id} key={chatroom._id} name={chatroom.name} isFavorite={false} />
+          <ChatListItem id={chatroom._id} key={chatroom._id} name={chatroom.name} isFavorite={false} onClickItem={this.props.onClickItem}/>
         )}
       </div>
     )

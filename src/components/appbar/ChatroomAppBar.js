@@ -9,12 +9,12 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import Badge from '@material-ui/core/Badge';
 import Button from '@material-ui/core/Button';
-import AccountCircle from '@material-ui/icons/AccountCircle';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import Hidden from '@material-ui/core/Hidden';
+
+import { CreateAccountButton } from './CreateAccountButton';
 import { CreateChatroomButton } from '../drawer/CreateChatroomButton';
 import { ChatList } from '../drawer/chatlist/ChatList';
 
@@ -111,9 +111,7 @@ class ChatroomAppBar extends React.Component {
               </Link>
             </Button>
             </div>
-            <IconButton color="inherit">
-              <AccountCircle style={{ fontSize: 30 }} />
-            </IconButton>
+            <CreateAccountButton />
           </Toolbar>
         </AppBar>
         <Hidden xsDown implementation="css">
@@ -144,7 +142,7 @@ class ChatroomAppBar extends React.Component {
           >
             <List className={classes.drawerList}>
               <CreateChatroomButton />
-              <ChatList />
+              <ChatList onClickItem={this.handleDrawerToggle} />
             </List>
           </Drawer>
         </Hidden>
