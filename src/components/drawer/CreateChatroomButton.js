@@ -71,7 +71,7 @@ class CreateChatroomButton extends React.Component {
   }
 
   verifyInput = () => {
-    if (this.state.chatroomName){
+    if (!this.state.chatroomName){
       this.setState({error: true});
       return false;
     } else {
