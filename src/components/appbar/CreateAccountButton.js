@@ -42,7 +42,10 @@ class CreateAccountButton extends React.Component {
 
   handleChange = (e) => {
     const { name, value } = e.target;
-    this.setState({ [name]: value });
+    this.setState({ 
+      [name]: value,
+      error: false 
+    });
   }
 
   handleCreate = () => {
@@ -59,15 +62,23 @@ class CreateAccountButton extends React.Component {
   }
 
   verifyInput = () => {
-    if ( ( !this.state.username ) || 
-      ( !this.state.password ) || 
-      ( !this.state.passwordCheck ) || 
-      ( this.state.password === this.state.passwordCheck ) ) {
-      this.setState({error: true});
+    if ( !this.state.username ) {
+      this.setState({error: "no-username"});
       return false;
-    } else {
-      return true;
     }
+    if ( !this.state.password ) {
+      this.setState({error: "no-password"});
+      return false;
+    }
+    if ( !this.state.passwordCheck ) {
+      this.setState({error: "no-password-check"});
+      return false;
+    }
+    if ( this.state.password !== this.state.passwordCheck ) {
+      this.setState({error: "check-failed"});
+      return false;
+    }
+    return true;
   }
 
   render () {

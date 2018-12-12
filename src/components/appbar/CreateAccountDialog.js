@@ -34,7 +34,7 @@ class CreateAccountDialog extends React.Component {
 			      Bored of not having a cool username and avatar ? sign up and you can chose a pseudo and an avatar for yourself !
 			    </DialogContentText>
 			    <TextField
-			    	error={error}
+			    	error={error === 'no-username'}
 			      autoFocus
 			      margin="dense"
 			      id="username"
@@ -44,10 +44,10 @@ class CreateAccountDialog extends React.Component {
 			      name="username"
 			      onChange={onChange}
 			      onKeyPress={onKeyPress}
-			      helperText={error ? "Please input a name for your chatroom.":""}
+			      helperText={error === 'no-username' ? "Please enter a username.":""}
 			    />
 			    <TextField
-			    	error={error}
+			    	error={error === 'no-password'}
 			      autoFocus
 			      margin="dense"
 			      id="password"
@@ -57,10 +57,10 @@ class CreateAccountDialog extends React.Component {
 			      name="password"
 			      onChange={onChange}
 			      onKeyPress={onKeyPress}
-			      helperText={error ? "Please input a name for your chatroom.":""}
+			      helperText={error === 'no-password' ? "Please enter a password.":""}
 			    />
 			    <TextField
-			    	error={error}
+			    	error={( error === "no-password-check" ) || ( error === "check-failed" )}
 			      autoFocus
 			      margin="dense"
 			      id="passwordCheck"
@@ -70,7 +70,9 @@ class CreateAccountDialog extends React.Component {
 			      name="passwordCheck"
 			      onChange={onChange}
 			      onKeyPress={onKeyPress}
-			      helperText={error ? "Please input a name for your chatroom.":""}
+			      helperText={error === 'no-password-check' ? "Please verify your password.":
+			      	error === 'check-failed' ? "Enter the same password as above here.":""
+			  }
 			    />
 			  </DialogContent>
 			  <DialogActions>
