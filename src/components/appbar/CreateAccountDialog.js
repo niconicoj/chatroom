@@ -35,7 +35,6 @@ class CreateAccountDialog extends React.Component {
 			    </DialogContentText>
 			    <TextField
 			    	error={error === 'no-username'}
-			      autoFocus
 			      margin="dense"
 			      id="username"
 			      label="username"
@@ -48,7 +47,6 @@ class CreateAccountDialog extends React.Component {
 			    />
 			    <TextField
 			    	error={error === 'no-password'}
-			      autoFocus
 			      margin="dense"
 			      id="password"
 			      label="password"
@@ -61,7 +59,6 @@ class CreateAccountDialog extends React.Component {
 			    />
 			    <TextField
 			    	error={( error === "no-password-check" ) || ( error === "check-failed" )}
-			      autoFocus
 			      margin="dense"
 			      id="passwordCheck"
 			      label="confirm your password"
