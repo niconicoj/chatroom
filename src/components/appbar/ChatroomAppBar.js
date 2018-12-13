@@ -124,7 +124,7 @@ class ChatroomAppBar extends React.Component {
           >
             <List className={classes.drawerList}>
               <CreateChatroomButton />
-              <ChatList />
+              <ChatList onClickItem={ () => {} } />
             </List>
           </Drawer>
         </Hidden>

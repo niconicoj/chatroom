@@ -6,6 +6,7 @@ import { ioSocket } from '../helpers';
 export const usersActions = {
   enterChatroom,
   registerAsGuest,
+  register,
   leaveChatroom,
   verifyUser
 };
@@ -66,7 +67,11 @@ function registerAsGuest() {
 
     usersService.createGuest().then(
       user => { 
-      		localStorage.setItem('user', JSON.stringify(user));
+      		localStorage.setItem('user', JSON.stringify({
+            name: user.name,
+            guest: user.guest,
+            _id: user._id
+          }));
           dispatch(success(user));
           dispatch(alertActions.success('Welcome !'));
       },
@@ -80,4 +85,30 @@ function registerAsGuest() {
   function request() { return { type: userConstants.REGISTER_GUEST_REQUEST } }
   function success(user) { return { type: userConstants.REGISTER_GUEST_SUCCESS, user } }
   function failure(error) { return { type: userConstants.REGISTER_GUEST_FAILURE, error } }
+}
+
+function register(username, password) {
+  return dispatch => {
+    dispatch(request());
+
+    usersService.createAccount(username, password).then(
+      user => { 
+          localStorage.setItem('user', JSON.stringify({
+            name: user.name,
+            guest: user.guest,
+            _id: user._id
+          }));
+          dispatch(success(user));
+          dispatch(alertActions.success('Welcome !'));
+      },
+      error => {
+          dispatch(failure(error.toString()));
+          dispatch(alertActions.error(error.toString()));
+      }
+    );
+  };
+
+  function request() { return { type: userConstants.REGISTER_REQUEST } }
+  function success(user) { return { type: userConstants.REGISTER_SUCCESS, user } }
+  function failure(error) { return { type: userConstants.REGISTER_FAILURE, error } }
 }

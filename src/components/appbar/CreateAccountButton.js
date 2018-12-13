@@ -8,7 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 
 import CreateAccountDialog from './CreateAccountDialog';
-import { chatroomsActions } from '../../actions';
+import { usersActions } from '../../actions';
 
 const styles = theme => ({
   stickyButton: {
@@ -50,7 +50,7 @@ class CreateAccountButton extends React.Component {
 
   handleCreate = () => {
     if ( this.verifyInput() ) {
-      //this.props.dispatch(chatroomsActions.create(this.state.chatroomName));
+      this.props.dispatch(usersActions.register(this.state.username, this.state.password));
       this.handleClose();
     }
   }

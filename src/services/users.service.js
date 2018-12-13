@@ -2,6 +2,7 @@ import { config } from '../config';
 
 export const usersService = {
   createGuest,
+  createAccount,
   getUser
 };
 
@@ -10,6 +11,20 @@ function createGuest() {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ "guest": true })
+  };
+
+  return fetch(`${config.apiUrl}/users`, requestOptions)
+    .then(handleResponse)
+    .then(user => {
+      return user;
+    });
+}
+
+function createAccount(username, password) {
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ "guest": false, "name": username, "password": password })
   };
 
   return fetch(`${config.apiUrl}/users`, requestOptions)

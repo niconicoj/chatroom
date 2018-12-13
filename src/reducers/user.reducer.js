@@ -49,9 +49,27 @@ export function user(state = initialState, action) {
           ...state,
           registering: false,
           name: action.user.name,
-          guest: action.user.guest
+          guest: action.user.guest,
+          _id: action.user._id
+
       };
     case userConstants.REGISTER_GUEST_FAILURE:
+      return {};
+
+    case userConstants.REGISTER_REQUEST:
+      return {
+        ...state,
+        registering: true,
+      };
+    case userConstants.REGISTER_SUCCESS:
+      return {
+          ...state,
+          registering: false,
+          name: action.user.name,
+          guest: action.user.guest,
+          _id: action.user._id
+      };
+    case userConstants.REGISTER_FAILURE:
       return {};
 
     default:
