@@ -14,7 +14,7 @@ import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import Hidden from '@material-ui/core/Hidden';
 
-import { CreateAccountButton } from './CreateAccountButton';
+import { AccountButton } from './AccountButton';
 import { CreateChatroomButton } from '../drawer/CreateChatroomButton';
 import { ChatList } from '../drawer/chatlist/ChatList';
 
@@ -111,7 +111,7 @@ class ChatroomAppBar extends React.Component {
               </Link>
             </Button>
             </div>
-            <CreateAccountButton />
+            <AccountButton />
           </Toolbar>
         </AppBar>
         <Hidden xsDown implementation="css">

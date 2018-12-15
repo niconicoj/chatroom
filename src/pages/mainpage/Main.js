@@ -12,6 +12,7 @@ import { ChatroomAppBar } from '../../components/appbar/ChatroomAppBar';
 import { Lounge } from '../../components/lounge/Lounge';
 import { Home } from '../../components/home/Home';
 import { FeedbackSnackbar } from '../../components/feedbacksnackbar/FeedbackSnackbar';
+import Dialogs from '../../components/dialogs/Dialogs';
 
 import { usersActions } from '../../actions';
 
@@ -71,6 +72,7 @@ class Main extends React.Component {
             <CircularProgress className={classes.progress} disableShrink size={200} color="secondary"/>
           </Modal>
           <FeedbackSnackbar />
+          <Dialogs />
         </div>
       </Router>
     );

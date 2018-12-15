@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -15,11 +16,11 @@ const styles = theme => ({
   }
 });
 
-class CreateAccountDialog extends React.Component {
+class LoginDialog extends React.Component {
 
   render () {
 
-  	const { open, onClose, onChange, onKeyPress, onCancel, onCreate, fullScreen, error } = this.props;
+  	const { open, onClose, onChange, onKeyPress, onCancel, onLogin, fullScreen, error } = this.props;
 
     return (
 	    <Dialog
@@ -31,7 +32,7 @@ class CreateAccountDialog extends React.Component {
 			  <DialogTitle id="form-dialog-title">Sign up !</DialogTitle>
 			  <DialogContent>
 			    <DialogContentText>
-			      Bored of not having a cool username and avatar ? sign up and you can chose a pseudo and an avatar for yourself !
+			      If you already have an account you can log in here !
 			    </DialogContentText>
 			    <TextField
 			    	error={error === 'no-username'}
@@ -57,27 +58,13 @@ class CreateAccountDialog extends React.Component {
 			      onKeyPress={onKeyPress}
 			      helperText={error === 'no-password' ? "Please enter a password.":""}
 			    />
-			    <TextField
-			    	error={( error === "no-password-check" ) || ( error === "check-failed" )}
-			      margin="dense"
-			      id="passwordCheck"
-			      label="confirm your password"
-			      type="password"
-			      fullWidth
-			      name="passwordCheck"
-			      onChange={onChange}
-			      onKeyPress={onKeyPress}
-			      helperText={error === 'no-password-check' ? "Please verify your password.":
-			      	error === 'check-failed' ? "Enter the same password as above here.":""
-			  }
-			    />
 			  </DialogContent>
 			  <DialogActions>
 			    <Button onClick={onCancel} color="primary">
 			      Cancel
 			    </Button>
-			    <Button variant="contained" onClick={onCreate} color="primary">
-			      Create !
+			    <Button variant="contained" onClick={onLogin} color="primary">
+			      Log in !
 			    </Button>
 			  </DialogActions>
 			</Dialog>
@@ -85,8 +72,17 @@ class CreateAccountDialog extends React.Component {
   }
 }
 
-CreateAccountDialog.propTypes = {
+function mapStateToProps(state) {
+  const { dialog, user } = state;
+    return {
+      dialog,
+      user
+    };
+}
+
+LoginDialog.propTypes = {
   fullScreen: PropTypes.bool.isRequired,
 };
 
-export default withMobileDialog()(CreateAccountDialog);
+const connectedLoginDialog = connect(mapStateToProps)(withMobileDialog()(LoginDialog));
+export { connectedLoginDialog as LoginDialog }; 

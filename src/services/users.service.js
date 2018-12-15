@@ -13,7 +13,7 @@ function createGuest() {
     body: JSON.stringify({ "guest": true })
   };
 
-  return fetch(`${config.apiUrl}/users`, requestOptions)
+  return fetch(`${config.apiUrl}/users/register`, requestOptions)
     .then(handleResponse)
     .then(user => {
       return user;
@@ -27,7 +27,7 @@ function createAccount(username, password) {
     body: JSON.stringify({ "guest": false, "name": username, "password": password })
   };
 
-  return fetch(`${config.apiUrl}/users`, requestOptions)
+  return fetch(`${config.apiUrl}/users/register`, requestOptions)
     .then(handleResponse)
     .then(user => {
       return user;
