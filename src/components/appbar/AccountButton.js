@@ -19,8 +19,6 @@ const styles = theme => ({
   }
 });
 
-
-
 class AccountButton extends React.Component {
 
   state = {
@@ -48,7 +46,7 @@ class AccountButton extends React.Component {
 
   render () {
 
-    const { classes, user } = this.props;
+    const { user } = this.props;
     const { open } = this.state;
 
     return (

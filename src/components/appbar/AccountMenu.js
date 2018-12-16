@@ -23,8 +23,6 @@ const styles = theme => ({
   }
 });
 
-
-
 class AccountMenu extends React.Component {
 
 	handleOpenCreateAccount = (event) => {
@@ -44,7 +42,7 @@ class AccountMenu extends React.Component {
 
   render () {
 
-  	const { classes, user, open, anchorEl, handleClose, handleOpenLogin } = this.props;
+  	const { user, open, anchorEl, handleClose } = this.props;
 
     return (
 			<Popper open={open} anchorEl={anchorEl} transition disablePortal>
