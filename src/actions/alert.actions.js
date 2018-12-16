@@ -7,12 +7,12 @@ export const alertActions = {
     hide
 };
 
-function success(message) {
-    return { type: alertConstants.SUCCESS, show:true, message };
+function success(message, show = true) {
+    return { type: alertConstants.SUCCESS, show:show, message };
 }
 
-function error(message) {
-    return { type: alertConstants.ERROR, show:true, message };
+function error(message, show = true) {
+    return { type: alertConstants.ERROR, show:show, message };
 }
 
 function clear() {

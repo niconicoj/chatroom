@@ -66,8 +66,7 @@ class Main extends React.Component {
           <Modal
             aria-labelledby="simple-modal-title"
             aria-describedby="simple-modal-description"
-            open={chatrooms.loading || false}
-            onClose={this.handleClose}
+            open={Boolean(chatrooms.loading)}
           >
             <CircularProgress className={classes.progress} disableShrink size={200} color="secondary"/>
           </Modal>

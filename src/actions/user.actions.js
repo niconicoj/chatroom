@@ -8,7 +8,9 @@ export const usersActions = {
   registerAsGuest,
   register,
   leaveChatroom,
-  verifyUser
+  verifyUser,
+  login,
+  logout
 };
 
 function enterChatroom(chatroom, user) {
@@ -61,6 +63,32 @@ function verifyUser(id) {
   function failure(error) { return { type: userConstants.VERIFY_FAILURE } }
 }
 
+function logout() {
+  return dispatch => {
+    dispatch(request());
+    localStorage.removeItem('user');
+    usersService.createGuest().then(
+      user => { 
+          localStorage.setItem('user', JSON.stringify({
+            name: user.name,
+            guest: user.guest,
+            _id: user._id
+          }));
+          dispatch(success(user));
+          dispatch(alertActions.success('See you soon !'));
+      },
+      error => {
+          dispatch(failure(error.toString()));
+          dispatch(alertActions.error(error.toString()));
+      }
+    );
+  };
+
+  function request() { return { type: userConstants.LOGOUT_REQUEST } }
+  function success(user) { return { type: userConstants.LOGOUT_SUCCESS, user } }
+  function failure(error) { return { type: userConstants.LOGOUT_FAILURE, error } }
+}
+
 function registerAsGuest() {
 	return dispatch => {
     dispatch(request());
@@ -73,7 +101,7 @@ function registerAsGuest() {
             _id: user._id
           }));
           dispatch(success(user));
-          dispatch(alertActions.success('Welcome !'));
+          dispatch(alertActions.success('Welcome !', false));
       },
       error => {
           dispatch(failure(error.toString()));
@@ -99,7 +127,7 @@ function register(username, password) {
             _id: user._id
           }));
           dispatch(success(user));
-          dispatch(alertActions.success('Welcome !'));
+          dispatch(alertActions.success(`Welcome ${user.name} !`));
       },
       error => {
           dispatch(failure(error.toString()));
@@ -111,4 +139,30 @@ function register(username, password) {
   function request() { return { type: userConstants.REGISTER_REQUEST } }
   function success(user) { return { type: userConstants.REGISTER_SUCCESS, user } }
   function failure(error) { return { type: userConstants.REGISTER_FAILURE, error } }
+}
+
+function login(username, password) {
+  return dispatch => {
+    dispatch(request());
+
+    usersService.login(username, password).then(
+      user => { 
+          localStorage.setItem('user', JSON.stringify({
+            name: user.name,
+            guest: user.guest,
+            _id: user._id
+          }));
+          dispatch(success(user));
+          dispatch(alertActions.success(`Welcome ${user.name} !`));
+      },
+      error => {
+          dispatch(failure(error.toString()));
+          dispatch(alertActions.error(error.toString()));
+      }
+    );
+  };
+
+  function request() { return { type: userConstants.LOGIN_REQUEST } }
+  function success(user) { return { type: userConstants.LOGIN_SUCCESS, user } }
+  function failure(error) { return { type: userConstants.LOGIN_FAILURE, error } }
 }

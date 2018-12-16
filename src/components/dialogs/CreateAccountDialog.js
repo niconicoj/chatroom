@@ -9,14 +9,15 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import withMobileDialog from '@material-ui/core/withMobileDialog';
-import MenuItem from '@material-ui/core/MenuItem';
 
 import { dialogActions, usersActions } from '../../actions';
 
 class CreateAccountDialog extends React.Component {
 
 	state = {
-    error: false,
+    error: {
+    	checkPassed: true
+    },
     username: "",
     password: "",
     passwordCheck: "",
@@ -30,27 +31,19 @@ class CreateAccountDialog extends React.Component {
   }
 
 	handleClose = () => {
-		this.props.dispatch(dialogActions.closeCreateAccount());
+		this.props.dispatch(dialogActions.closeDialog());
 	}
 
 	verifyInput = () => {
-    if ( !Boolean(this.state.username) ) {
-      this.setState({error: "no-username"});
-      return false;
-    }
-    if ( !this.state.password ) {
-      this.setState({error: "no-password"});
-      return false;
-    }
-    if ( !this.state.passwordCheck ) {
-      this.setState({error: "no-password-check"});
-      return false;
-    }
-    if ( this.state.password !== this.state.passwordCheck ) {
-      this.setState({error: "check-failed"});
-      return false;
-    }
-    return true;
+		const error = {
+			noUsername: !Boolean(this.state.username),
+			noPassword: !Boolean(this.state.password),
+			noPasswordCheck: !Boolean(this.state.passwordCheck),
+			checkPassed: ( this.state.password === this.state.passwordCheck )
+		};
+    this.setState({...this.state, error});
+
+    return ( !error.noUsername && !error.noPassword && !error.noPasswordCheck && error.checkPassed );
   }
 
   handleKeyPress = (e) => {
@@ -63,14 +56,16 @@ class CreateAccountDialog extends React.Component {
     const { name, value } = e.target;
     this.setState({ 
       [name]: value,
-      error: false 
+      error: {
+	    	checkPassed: true
+	    }
     });
   }
 
   render () {
 
-  	const { fullScreen, dialog, onCreate } = this.props;
-  	const {  error } = this.state;
+  	const { fullScreen, dialog } = this.props;
+  	const {  noUsername, noPassword, noPasswordCheck, checkPassed } = this.state.error;
 
   	const open = dialog.createAccount;
 
@@ -87,7 +82,8 @@ class CreateAccountDialog extends React.Component {
 			      Bored of not having a cool username and avatar ? sign up and you can chose a pseudo and an avatar for yourself !
 			    </DialogContentText>
 			    <TextField
-			    	error={error === 'no-username'}
+			    	error={noUsername}
+			    	value={this.state.username}
 			      margin="dense"
 			      id="username"
 			      label="username"
@@ -96,10 +92,11 @@ class CreateAccountDialog extends React.Component {
 			      name="username"
 			      onChange={this.handleChange}
 			      onKeyPress={this.onKeyPress}
-			      helperText={error === 'no-username' ? "Please enter a username.":""}
+			      helperText={ Boolean(noUsername) ? "Please enter a username.":""}
 			    />
 			    <TextField
-			    	error={error === 'no-password'}
+			    	error={noPassword}
+			    	value={this.state.password}
 			      margin="dense"
 			      id="password"
 			      label="password"
@@ -108,10 +105,11 @@ class CreateAccountDialog extends React.Component {
 			      name="password"
 			      onChange={this.handleChange}
 			      onKeyPress={this.onKeyPress}
-			      helperText={error === 'no-password' ? "Please enter a password.":""}
+			      helperText={ noPassword ? "Please enter a password.":""}
 			    />
 			    <TextField
-			    	error={( error === "no-password-check" ) || ( error === "check-failed" )}
+			    	error={(( noPasswordCheck ) || ( !checkPassed ))}
+			    	value={this.state.passwordCheck}
 			      margin="dense"
 			      id="passwordCheck"
 			      label="confirm your password"
@@ -120,9 +118,9 @@ class CreateAccountDialog extends React.Component {
 			      name="passwordCheck"
 			      onChange={this.handleChange}
 			      onKeyPress={this.onKeyPress}
-			      helperText={error === 'no-password-check' ? "Please verify your password.":
-			      	error === 'check-failed' ? "Enter the same password as above here.":""
-			  }
+			      helperText={ noPasswordCheck ? "Please validate your password.":
+			      	!checkPassed ? "Enter the same password as above here.":""
+			  		}
 			    />
 			  </DialogContent>
 			  <DialogActions>
@@ -140,10 +138,10 @@ class CreateAccountDialog extends React.Component {
 
 function mapStateToProps(state) {
   const { dialog, user } = state;
-    return {
-      dialog,
-      user
-    };
+  return {
+    dialog,
+    user
+  };
 }
 
 CreateAccountDialog.propTypes = {

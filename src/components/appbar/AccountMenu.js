@@ -11,7 +11,7 @@ import Grow from '@material-ui/core/Grow';
 import Paper from '@material-ui/core/Paper';
 import MenuList from '@material-ui/core/MenuList';
 
-import { dialogActions } from '../../actions';
+import { dialogActions, usersActions } from '../../actions';
 
 const styles = theme => ({
   stickyButton: {
@@ -27,8 +27,19 @@ const styles = theme => ({
 
 class AccountMenu extends React.Component {
 
-	handleOpenCreateAccount = () => {
+	handleOpenCreateAccount = (event) => {
 		this.props.dispatch(dialogActions.openCreateAccount());
+		this.props.handleClose(event);
+	}
+
+	handleOpenLogin = (event) => {
+		this.props.dispatch(dialogActions.openLogin());
+		this.props.handleClose(event);
+	}
+
+	handleLogout = (event) => {
+		this.props.dispatch(usersActions.logout());
+		this.props.handleClose(event);
 	}
 
   render () {
@@ -41,7 +52,7 @@ class AccountMenu extends React.Component {
 			    <Grow
 			      {...TransitionProps}
 			      id="menu-list-grow"
-			      style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+			      style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'bottom end' }}
 			    >
 			      <Paper>
 			        <ClickAwayListener onClickAway={handleClose}>
@@ -49,14 +60,14 @@ class AccountMenu extends React.Component {
 			            {user.guest ?
 			              <div>
 			              <MenuItem onClick={this.handleOpenCreateAccount}>sign up</MenuItem>
-			              <MenuItem onClick={handleOpenLogin}>Log in</MenuItem>
+			              <MenuItem onClick={this.handleOpenLogin}>Log in</MenuItem>
 			              </div>
 			              :
 			              <div>
 			              <Link to={`/myAccount`} style={{textDecoration: 'none', color: 'black'}}>
 			                <MenuItem onClick={handleClose}>My account</MenuItem>
 			              </Link>
-			              <MenuItem onClick={handleClose}>Log out</MenuItem>
+			              <MenuItem onClick={this.handleLogout}>Log out</MenuItem>
 			              </div>
 			             }
 			          </MenuList>

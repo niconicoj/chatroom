@@ -7,6 +7,11 @@ export function dialog(state = {}, action) {
         ...state,
         createAccount: true
       };
+    case dialogConstants.OPEN_LOGIN:
+      return {
+        ...state,
+        login: true
+      };
     case dialogConstants.CLOSE:
       return {};
     default:

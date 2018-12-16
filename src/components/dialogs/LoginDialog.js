@@ -10,60 +10,104 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import withMobileDialog from '@material-ui/core/withMobileDialog';
 
-const styles = theme => ({
-  createButton: {
-    color: '#747474'
-  }
-});
+import { dialogActions, usersActions } from '../../actions';
 
 class LoginDialog extends React.Component {
 
+	state = {
+		error: false,
+    username: "",
+    password: "",
+    passwordCheck: "",
+  }
+
+	handleLogin = () => {
+    if ( this.verifyInput() ) {
+      this.props.dispatch(usersActions.login(this.state.username, this.state.password));
+      this.handleClose();
+    }
+  }
+
+	handleClose = () => {
+		this.props.dispatch(dialogActions.closeDialog());
+	}
+
+	verifyInput = () => {
+		const error = {
+			noUsername: !Boolean(this.state.username),
+			noPassword: !Boolean(this.state.password),
+		};
+    this.setState({...this.state, error});
+
+    return ( !error.noUsername && !error.noPassword );
+  }
+
+  handleKeyPress = (e) => {
+    if ( ( e.key === 'Enter' ) && ( this.verifyInput() ) ) {
+      this.handleLogin();
+    }
+  }
+
+  handleChange = (e) => {
+    const { name, value } = e.target;
+    this.setState({ 
+      [name]: value,
+      error: {
+	    	checkPassed: true
+	    }
+    });
+  }
+
   render () {
 
-  	const { open, onClose, onChange, onKeyPress, onCancel, onLogin, fullScreen, error } = this.props;
+  	const { fullScreen, dialog } = this.props;
+  	const open = dialog.login;
+  	const {  noUsername, noPassword } = this.state.error;
 
     return (
 	    <Dialog
 	    	fullScreen={fullScreen}
-			  open={open}
-			  onClose={onClose}
+			  open={Boolean(open)}
+			  onClose={this.handleClose}
 			  aria-labelledby="form-dialog-title"
 			>
-			  <DialogTitle id="form-dialog-title">Sign up !</DialogTitle>
+			  <DialogTitle id="form-dialog-title">Log in !</DialogTitle>
 			  <DialogContent>
 			    <DialogContentText>
 			      If you already have an account you can log in here !
 			    </DialogContentText>
 			    <TextField
-			    	error={error === 'no-username'}
+			    	error={noUsername}
+			    	value={this.state.username}
 			      margin="dense"
 			      id="username"
 			      label="username"
 			      type="text"
 			      fullWidth
 			      name="username"
-			      onChange={onChange}
-			      onKeyPress={onKeyPress}
-			      helperText={error === 'no-username' ? "Please enter a username.":""}
+			      onChange={this.handleChange}
+			      onKeyPress={this.handleKeyPress}
+			      helperText={noUsername ? "Please enter your username.":""}
 			    />
 			    <TextField
-			    	error={error === 'no-password'}
+			    	error={noPassword}
+			    	value={this.state.password}
 			      margin="dense"
 			      id="password"
 			      label="password"
 			      type="password"
 			      fullWidth
 			      name="password"
-			      onChange={onChange}
-			      onKeyPress={onKeyPress}
-			      helperText={error === 'no-password' ? "Please enter a password.":""}
+			      onChange={this.handleChange}
+			      onKeyPress={this.handleKeyPress}
+			      helperText={noPassword ? "Please enter your password.":""}
 			    />
 			  </DialogContent>
 			  <DialogActions>
-			    <Button onClick={onCancel} color="primary">
+			    <Button onClick={this.handleClose} color="primary">
 			      Cancel
 			    </Button>
-			    <Button variant="contained" onClick={onLogin} color="primary">
+			    <Button variant="contained" onClick={this.handleLogin} color="primary">
 			      Log in !
 			    </Button>
 			  </DialogActions>

@@ -3,7 +3,8 @@ import { config } from '../config';
 export const usersService = {
   createGuest,
   createAccount,
-  getUser
+  getUser,
+  login
 };
 
 function createGuest() {
@@ -28,6 +29,20 @@ function createAccount(username, password) {
   };
 
   return fetch(`${config.apiUrl}/users/register`, requestOptions)
+    .then(handleResponse)
+    .then(user => {
+      return user;
+    });
+}
+
+function login(username, password) {
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ "name": username, "password": password })
+  };
+
+  return fetch(`${config.apiUrl}/users/login`, requestOptions)
     .then(handleResponse)
     .then(user => {
       return user;

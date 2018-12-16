@@ -72,6 +72,38 @@ export function user(state = initialState, action) {
     case userConstants.REGISTER_FAILURE:
       return {};
 
+    case userConstants.LOGIN_REQUEST:
+      return {
+        ...state,
+        loggingIn: true,
+      };
+    case userConstants.LOGIN_SUCCESS:
+      return {
+          ...state,
+          loggingIn: false,
+          name: action.user.name,
+          guest: action.user.guest,
+          _id: action.user._id
+      };
+    case userConstants.LOGIN_FAILURE:
+      return {};
+
+    case userConstants.LOGOUT_REQUEST:
+      return {
+        ...state,
+        loggingOut: true,
+      };
+    case userConstants.LOGOUT_SUCCESS:
+      return {
+          ...state,
+          loggingOut: false,
+          name: action.user.name,
+          guest: action.user.guest,
+          _id: action.user._id
+      };
+    case userConstants.LOGOUT_FAILURE:
+      return {};
+
     default:
       return state
   }
