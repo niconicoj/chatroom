@@ -73,6 +73,17 @@ const styles = theme => ({
     width: 22,
     height: 22
   },
+  embed: {
+    textAlign: 'center'
+  },
+  embedIframe: {
+    width: 480,
+    height: 360,
+    [theme.breakpoints.down('xs')]: {
+      width: 256,
+      height: 144
+    }
+  }
 });
 
 class Message extends React.Component {
@@ -90,6 +101,17 @@ class Message extends React.Component {
 
     var localRelativeTime = moment.utc(time).toDate();
 
+    var embededContent = "";
+
+    var regExp = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|&v(?:i)?=))([^#&?]{11})/;
+
+    if (text.match(regExp)){
+      var match = text.match(regExp);
+      var embedId = match&&match[1].length===11 ? match[1] : false;
+      console.log(embedId);
+      embededContent = <iframe className={classes.embedIframe} src={`https://www.youtube.com/embed/${embedId}`} frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+    }
+
     return (
       <Grid container
         direction="column"
@@ -99,9 +121,16 @@ class Message extends React.Component {
         
           <Paper className={styleClass} elevation={0}>
             <Badge badgeContent={<Avatar src={`https://www.gravatar.com/avatar/${id}?d=retro`} className={classes.avatar}/>} color="secondary" classes={{ badge: badgeClass }}>
-              <Typography className={textColor} component="p">
-                {text}
-              </Typography>
+              <Grid container>
+                <Grid item xs={12}>
+                <Typography className={textColor} component="p">
+                  {text}
+                </Typography>
+                </Grid>
+                <Grid item xs={12} className={classes.embed}>
+                  {embededContent}
+                </Grid>
+              </Grid>
             </Badge>
           </Paper>
           <Typography variant="caption" className={classes.info}>
