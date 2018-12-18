@@ -39,9 +39,12 @@ const styles = theme => ({
     marginLeft: 220,
     marginBottom: 0,
     backgroundColor:theme.palette.primary.light,
-    display: 'flex',
+    display: 'inline-block',
     right: 0,
     wordBreak: 'break-word'
+  },
+  test: {
+    display: 'inline-block',
   },
   info: {
     marginTop: 0,
@@ -112,30 +115,31 @@ class Message extends React.Component {
       embededContent = <iframe className={classes.embedIframe} src={`https://www.youtube.com/embed/${embedId}`} frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
     }
 
+    var timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
     return (
       <Grid container
         direction="column"
         justify="flex-start"
         alignItems={align}
-      >
-        
-          <Paper className={styleClass} elevation={0}>
-            <Badge badgeContent={<Avatar src={`https://www.gravatar.com/avatar/${id}?d=retro`} className={classes.avatar}/>} color="secondary" classes={{ badge: badgeClass }}>
-              <Grid container>
-                <Grid item xs={12}>
-                <Typography className={textColor} component="p">
-                  {text}
-                </Typography>
-                </Grid>
-                <Grid item xs={12} className={classes.embed}>
-                  {embededContent}
-                </Grid>
+      >  
+        <Paper className={styleClass} elevation={0}>
+          <Badge badgeContent={<Avatar src={`https://www.gravatar.com/avatar/${id}?d=retro`} className={classes.avatar}/>} color="secondary" classes={{ badge: badgeClass }}>
+            <Grid container className={classes.test}>
+              <Grid item xs={12}>
+              <Typography className={textColor} component="p">
+                {text}
+              </Typography>
               </Grid>
-            </Badge>
-          </Paper>
-          <Typography variant="caption" className={classes.info}>
-            {sender}, <Moment tz="Europe/Paris" locale="fr" interval={5} fromNow ago date={localRelativeTime} />
-          </Typography>
+              <Grid item xs={12} className={classes.embed}>
+                {embededContent}
+              </Grid>
+            </Grid>
+          </Badge>
+        </Paper>
+        <Typography variant="caption" className={classes.info}>
+          {sender}, <Moment tz={timezone} locale="en" interval={5} fromNow date={localRelativeTime} />
+        </Typography>
       </Grid>
     )
   }

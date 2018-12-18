@@ -14,7 +14,7 @@ const styles = theme => ({
   },
   chat: {
     paddingBottom: 20,
-    marginBottom: 112,
+    marginBottom: 92,
     [theme.breakpoints.down('xs')]: {
       marginBottom: 82,
     },

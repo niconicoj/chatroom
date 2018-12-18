@@ -92,7 +92,7 @@ class CreateChatroomButton extends React.Component {
             <ListItemIcon>
               <AddCircle />
             </ListItemIcon>
-            <ListItemText primary="Create Chatroom" />
+            <ListItemText primary="Create a Chatroom" />
           </ListItem>
           <ListItem component="div">
             <TextField
