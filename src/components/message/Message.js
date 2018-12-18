@@ -94,13 +94,13 @@ class Message extends React.Component {
   render () {
     const { classes, text, sent, time, sender, id } = this.props;
 
-    const align = ( ( sent && "flex-end" ) || "flex-start" );
+    const align = sent ? "flex-end" : "flex-start";
 
-    const styleClass = ( ( sent && classes.messageSent ) || classes.messageReceived );
+    const styleClass = sent ? classes.messageSent : classes.messageReceived;
 
-    const textColor = ( ( sent && classes.textSent ) || classes.textReceived );
+    const textColor = sent ? classes.textSent : classes.textReceived;
 
-    const badgeClass = ( ( sent && classes.badgeSent ) || classes.badgeReceived );
+    const badgeClass = sent ? classes.badgeSent : classes.badgeReceived;
 
     var localRelativeTime = moment.utc(time).toDate();
 
