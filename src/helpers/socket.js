@@ -7,7 +7,7 @@ export const ioSocket = {
   closeSocket,
 };
 
-const socket = io('51.75.252.252:8890',{ 
+const socket = io('https://252.ip-51-75-252.eu:8890',{ 
   autoConnect: false 
 });
 
