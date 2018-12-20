@@ -8,7 +8,8 @@ export const ioSocket = {
 };
 
 const socket = io('https://252.ip-51-75-252.eu:8890',{ 
-  autoConnect: false 
+  autoConnect: false,
+  secure: true
 });
 
 function openSocket(){
