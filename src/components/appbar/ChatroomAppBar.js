@@ -106,7 +106,7 @@ class ChatroomAppBar extends React.Component {
                   noWrap
                   className={classes.title}
                 >
-                Chatroom
+                Chat.io
                 </Typography>
               </Link>
             </Button>
