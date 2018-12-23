@@ -11,6 +11,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { ChatroomAppBar } from '../../components/appbar/ChatroomAppBar';
 import { Lounge } from '../../components/lounge/Lounge';
 import { Home } from '../../components/home/Home';
+import { Account } from '../../components/account/Account';
 import { FeedbackSnackbar } from '../../components/feedbacksnackbar/FeedbackSnackbar';
 import Dialogs from '../../components/dialogs/Dialogs';
 
@@ -58,6 +59,7 @@ class Main extends React.Component {
           <CssBaseline />
           <ChatroomAppBar />
           <Route exact path="/" component={Home} />
+          <Route exact path="/myAccount" component={Account} />
           <Route path="/chatroom/:id" render={
             ({match}) => (
               <Lounge id={match.params.id} /> 
