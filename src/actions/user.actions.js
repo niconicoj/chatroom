@@ -68,13 +68,13 @@ function logout() {
     dispatch(request());
     localStorage.removeItem('user');
     usersService.createGuest().then(
-      user => { 
+      data => { 
           localStorage.setItem('user', JSON.stringify({
-            name: user.name,
-            guest: user.guest,
-            _id: user._id
+            name: data.user.name,
+            guest: data.user.guest,
+            _id: data.user._id
           }));
-          dispatch(success(user));
+          dispatch(success(data));
           dispatch(alertActions.success('See you soon !'));
       },
       error => {
@@ -85,7 +85,7 @@ function logout() {
   };
 
   function request() { return { type: userConstants.LOGOUT_REQUEST } }
-  function success(user) { return { type: userConstants.LOGOUT_SUCCESS, user } }
+  function success(data) { return { type: userConstants.LOGOUT_SUCCESS, data } }
   function failure(error) { return { type: userConstants.LOGOUT_FAILURE, error } }
 }
 

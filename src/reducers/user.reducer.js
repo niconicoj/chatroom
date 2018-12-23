@@ -112,9 +112,10 @@ export function user(state = initialState, action) {
       return {
           ...state,
           loggingOut: false,
-          name: action.user.name,
-          guest: action.user.guest,
-          _id: action.user._id
+          name: action.data.user.name,
+          guest: action.data.user.guest,
+          _id: action.data.user._id,
+          api_token: action.data.api_token
       };
     case userConstants.LOGOUT_FAILURE:
       return {};
