@@ -65,11 +65,25 @@ export function user(state = initialState, action) {
       return {
           ...state,
           registering: false,
-          name: action.user.name,
-          guest: action.user.guest,
-          _id: action.user._id
+          name: action.data.user.name,
+          guest: action.data.user.guest,
+          _id: action.data.user._id,
+          api_token: action.data.api_token
       };
     case userConstants.REGISTER_FAILURE:
+      return {};
+
+      case userConstants.VERIFY_REQUEST:
+      return {
+        ...state,
+        registering: true,
+      };
+    case userConstants.VERIFY_SUCCESS:
+      return {
+          ...state,
+          api_token: action.data.api_token
+      };
+    case userConstants.VERIFY_FAILURE:
       return {};
 
     case userConstants.LOGIN_REQUEST:
@@ -81,9 +95,10 @@ export function user(state = initialState, action) {
       return {
           ...state,
           loggingIn: false,
-          name: action.user.name,
-          guest: action.user.guest,
-          _id: action.user._id
+          name: action.data.user.name,
+          guest: action.data.user.guest,
+          _id: action.data.user._id,
+          api_token: action.data.api_token
       };
     case userConstants.LOGIN_FAILURE:
       return {};
