@@ -24,7 +24,8 @@ const styles = theme => ({
     },
   },
   avatar: {
-    marginTop: 20
+    marginTop: 20,
+    maxWidth: 250
   },
   content: {
     position: 'absolute',
@@ -48,7 +49,8 @@ const styles = theme => ({
   },
   list: {
     marginLeft: 20,
-    marginRight: 20
+    marginRight: 20,
+    marginBottom: 20
   }
 });
 
@@ -182,9 +184,6 @@ class Account extends React.Component {
           <Divider/>
           <List component="nav">
             <ListItem>
-              <ListItemIcon>
-                <AccountCircle />
-              </ListItemIcon>
               <Grid
                 container
                 direction="row"

@@ -57,15 +57,17 @@ class AccountMenu extends React.Component {
 			          <MenuList>
 			            {user.guest ?
 			              <div>
-			              <MenuItem onClick={this.handleOpenCreateAccount}>sign up</MenuItem>
-			              <MenuItem onClick={this.handleOpenLogin}>Log in</MenuItem>
+											<MenuItem onClick={this.handleOpenCreateAccount}>sign up</MenuItem>
+											<MenuItem onClick={this.handleOpenLogin}>Log in</MenuItem>
 			              </div>
 			              :
 			              <div>
-			              <Link to={`/myAccount`} style={{textDecoration: 'none', color: 'black'}}>
-			                <MenuItem onClick={handleClose}>My account</MenuItem>
-			              </Link>
-			              <MenuItem onClick={this.handleLogout}>Log out</MenuItem>
+											<Link to={`/myAccount`} style={{textDecoration: 'none', color: 'black'}}>
+												<MenuItem onClick={handleClose}>My account</MenuItem>
+											</Link>
+											<Link to={`/`} style={{textDecoration: 'none', color: 'black'}}>
+												<MenuItem onClick={this.handleLogout}>Log out</MenuItem>
+											</Link>
 			              </div>
 			             }
 			          </MenuList>
