@@ -3,28 +3,25 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import Divider from '@material-ui/core/Divider';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import DraftsIcon from '@material-ui/icons/Drafts';
 import Typography from '@material-ui/core/Typography';
-import { Divider } from '@material-ui/core';
-import Fab from '@material-ui/core/Fab';
-import EditIcon from '@material-ui/icons/Edit';
+import { TextField, Button, Grid, Card } from '@material-ui/core';
 
 const styles = theme => ({
   appBarSpacer: {
     height: 1,
     display: 'block',
   },
-  card: {
-    maxWidth: 140,
-    marginLeft: 20
-  },
-  media: {
-    height: 140,
+  saveButton: {
+    [theme.breakpoints.down('xs')]: {
+      marginTop: 20,
+    },
   },
   content: {
     position: 'absolute',
@@ -39,24 +36,22 @@ const styles = theme => ({
     padding: 0,
     paddingTop: 64,
     paddingBottom: 92,
-
-
-  },
-  messageGrid :{
-    marginBottom: 84,
-    width:'100%'
   },
   text: {
     padding: 20,
   },
-  cardContent: {
-    padding: '0 !important',
+  textField: {
+    marginLeft: 10
   },
-  fab: {
-    top: '30%',
-    left: '30%',
+  list: {
+    marginLeft: 20,
+    marginRight: 20
   }
 });
+
+function ListItemLink(props) {
+  return <ListItem component="a" {...props} />;
+}
 
 class Account extends React.Component {
   
@@ -73,22 +68,122 @@ class Account extends React.Component {
         <Typography className={classes.text} variant="h4">
           Your account
         </Typography>
-        <Divider/>
-        <Typography className={classes.text} variant="h6">
-          Profile picture
-        </Typography>
-        <Card className={classes.card}>
-          <CardContent className={classes.cardContent}>
-            <CardMedia
-              className={classes.media}
-              image="https://www.gravatar.com/avatar/5c1f8f6eb8f967292f511a23?d=retro"
-              title="Contemplative Reptile"
-            >
-            <Fab color="primary" aria-label="Edit" className={classes.fab}>
-              <EditIcon />
-            </Fab>
-            </CardMedia>
-          </CardContent>
+        <Card className={classes.list}>
+          <List component="nav">
+            <ListItem>
+              <ListItemIcon>
+                <AccountCircle />
+              </ListItemIcon>
+              <Grid
+                container
+                direction="row"
+                justify="space-between"
+                alignItems="center"
+              >
+                <Grid item xs={10}>
+                <Typography>
+                  Username :
+                </Typography>
+                <TextField
+                  value={user.name}
+                  fullWidth
+                  className={classes.textField}
+                >
+                </TextField>
+                </Grid>
+                <Grid item>
+                  <Button variant="contained" className={classes.saveButton}>
+                    Save
+                  </Button>
+                </Grid>
+              </Grid>
+            </ListItem>
+          </List>
+          <Divider />
+          <List component="nav">
+            <ListItem>
+              <ListItemIcon>
+                <AccountCircle />
+              </ListItemIcon>
+              <Grid
+                container
+                direction="row"
+                justify="space-between"
+                alignItems="center"
+              >
+                <Grid item  xs={10}>
+                <Typography>
+                  Password :
+                </Typography>
+                <TextField
+                  type="password"
+                  fullWidth
+                  className={classes.textField}
+                >
+                </TextField>
+                </Grid>
+              </Grid>
+            </ListItem>
+            <ListItem>
+              <ListItemIcon>
+                <AccountCircle />
+              </ListItemIcon>
+              <Grid
+                container
+                direction="row"
+                justify="space-between"
+                alignItems="center"
+              >
+                <Grid item xs={10}>
+                <Typography>
+                  Confirm :
+                </Typography>
+                <TextField
+                  type="password"
+                  fullWidth
+                  className={classes.textField}
+                >
+                </TextField>
+                </Grid>
+                <Grid item>
+                  <Button variant="contained" className={classes.saveButton}>
+                    Save
+                  </Button>
+                </Grid>
+              </Grid>
+            </ListItem>
+          </List>
+          <Divider/>
+          <List component="nav">
+            <ListItem>
+              <ListItemIcon>
+                <AccountCircle />
+              </ListItemIcon>
+              <Grid
+                container
+                direction="row"
+                justify="space-between"
+                alignItems="center"
+              >
+                <Grid item xs={10}>
+                <Typography>
+                  Avatar :
+                </Typography>
+                <TextField
+                  value={`https://www.gravatar.com/avatar/${user._id}?d=retro`}
+                  fullWidth
+                  className={classes.textField}
+                >
+                </TextField>
+                </Grid>
+                <Grid item>
+                  <Button variant="contained" className={classes.saveButton}>
+                    Save
+                  </Button>
+                </Grid>
+              </Grid>
+            </ListItem>
+          </List>
         </Card>
       </main>
     )
