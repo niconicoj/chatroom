@@ -6,12 +6,12 @@ import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import DraftsIcon from '@material-ui/icons/Drafts';
 import Typography from '@material-ui/core/Typography';
 import { TextField, Button, Grid, Card } from '@material-ui/core';
+
+import { usersActions } from '../../actions';
 
 const styles = theme => ({
   appBarSpacer: {
@@ -22,6 +22,9 @@ const styles = theme => ({
     [theme.breakpoints.down('xs')]: {
       marginTop: 20,
     },
+  },
+  avatar: {
+    marginTop: 20
   },
   content: {
     position: 'absolute',
@@ -49,11 +52,32 @@ const styles = theme => ({
   }
 });
 
-function ListItemLink(props) {
-  return <ListItem component="a" {...props} />;
-}
-
 class Account extends React.Component {
+
+  state = {
+    name: this.props.user.name,
+    avatar: this.props.user.avatar ? this.props.user.avatar : `https://www.gravatar.com/avatar/${this.props.user._id}?d=retro`
+  }
+
+  handleKeyPress = (e) => {
+    if ( ( e.key === 'Enter' ) && ( this.verifyInput() ) ) {
+      this.handleLogin();
+    }
+  }
+
+  handleChange = (e) => {
+    const { name, value } = e.target;
+    this.setState({ 
+      [name]: value,
+      error: {
+	    	checkPassed: true
+	    }
+    });
+  }
+
+  handleSaveAvatar = () => {
+    this.props.dispatch(usersActions.changeAvatar(this.props.user._id, this.state.avatar, this.props.user.api_token));
+  }
   
   render () {
     const { classes, user } = this.props;
@@ -61,6 +85,8 @@ class Account extends React.Component {
     if (user.currentChatroom) {
       return <Redirect to={{ pathname: "/chatroom", search: `?id=${user.currentChatroom}` }}/>;
     }
+
+    const avatar = user.avatar ? user.avatar : `https://www.gravatar.com/avatar/${user._id}?d=retro`;
 
     return (
       <main className={classes.content}>
@@ -170,14 +196,18 @@ class Account extends React.Component {
                   Avatar :
                 </Typography>
                 <TextField
-                  value={`https://www.gravatar.com/avatar/${user._id}?d=retro`}
+                  value={this.state.avatar}
                   fullWidth
                   className={classes.textField}
+                  onChange={this.handleChange}
+			            onKeyPress={this.handleKeyPress}
+                  name="avatar"
                 >
                 </TextField>
+                <img src={avatar} alt={'avatar'} className={classes.avatar} />
                 </Grid>
                 <Grid item>
-                  <Button variant="contained" className={classes.saveButton}>
+                  <Button variant="contained" className={classes.saveButton} onClick={this.handleSaveAvatar}>
                     Save
                   </Button>
                 </Grid>

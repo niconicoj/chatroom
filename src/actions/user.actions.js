@@ -10,7 +10,8 @@ export const usersActions = {
   leaveChatroom,
   verifyUser,
   login,
-  logout
+  logout,
+  changeAvatar
 };
 
 function enterChatroom(chatroom, user) {
@@ -165,4 +166,28 @@ function login(username, password) {
   function request() { return { type: userConstants.LOGIN_REQUEST } }
   function success(data) { return { type: userConstants.LOGIN_SUCCESS, data } }
   function failure(error) { return { type: userConstants.LOGIN_FAILURE, error } }
+}
+
+function changeAvatar(id, avatar, token) {
+  return dispatch => {
+    dispatch(request({avatar: avatar, token: token}));
+
+    usersService.changeAvatar(id, avatar, token).then(
+      data => {
+        localStorage.setItem('user', JSON.stringify({
+          ...JSON.parse(localStorage.getItem('user')),
+          avatar: data.avatar
+        }));
+        dispatch(success(data));
+      },
+      error => {
+        dispatch(failure(error.toString()));
+        dispatch(alertActions.error(error.toString()));
+      }
+    );
+  };
+
+  function request(data) { return { type: userConstants.CHANGE_AVATAR_REQUEST, data } }
+  function success(data) { return { type: userConstants.CHANGE_AVATAR_SUCCESS, data } }
+  function failure(error) { return { type: userConstants.CHANGE_AVATAR_FAILURE, error } }
 }

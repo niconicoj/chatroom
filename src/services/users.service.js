@@ -4,7 +4,8 @@ export const usersService = {
   createGuest,
   createAccount,
   getUser,
-  login
+  login,
+  changeAvatar
 };
 
 function createGuest() {
@@ -53,6 +54,20 @@ function getUser(id) {
   const requestOptions = {
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },
+  };
+
+  return fetch(`${config.apiUrl}/users/${id}`, requestOptions)
+    .then(handleResponse)
+    .then(user => {
+      return user;
+    });
+}
+
+function changeAvatar(id, avatar, token) {
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'token': token },
+    body: JSON.stringify({ "avatar": avatar })
   };
 
   return fetch(`${config.apiUrl}/users/${id}`, requestOptions)

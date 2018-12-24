@@ -120,6 +120,18 @@ export function user(state = initialState, action) {
     case userConstants.LOGOUT_FAILURE:
       return {};
 
+      case userConstants.CHANGE_AVATAR_REQUEST:
+      return {
+        ...state
+      };
+    case userConstants.CHANGE_AVATAR_SUCCESS:
+      return {
+          ...state,
+          avatar: action.data.avatar
+      };
+    case userConstants.CHANGE_AVATAR_FAILURE:
+      return {};
+
     default:
       return state
   }

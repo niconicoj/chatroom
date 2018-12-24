@@ -49,6 +49,8 @@ class AccountButton extends React.Component {
     const { user } = this.props;
     const { open } = this.state;
 
+    const avatar = user.avatar ? user.avatar : `https://www.gravatar.com/avatar/${user._id}?d=retro`;
+
     return (
       <div>
         <IconButton 
@@ -60,7 +62,7 @@ class AccountButton extends React.Component {
           aria-haspopup="true"
           onClick={this.handleClickOpen}
         >
-          {user.guest ? <AccountCircle style={{ fontSize: 30 }} />:<Avatar alt="Natacha" src={`https://www.gravatar.com/avatar/${user._id}?d=retro`} />}
+          {user.guest ? <AccountCircle style={{ fontSize: 30 }} />:<Avatar alt="Natacha" src={avatar} />}
         </IconButton>
         <AccountMenu
           user={user}
