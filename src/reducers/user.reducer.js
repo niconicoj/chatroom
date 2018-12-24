@@ -50,7 +50,8 @@ export function user(state = initialState, action) {
           registering: false,
           name: action.user.name,
           guest: action.user.guest,
-          _id: action.user._id
+          _id: action.user._id,
+          avatar: false
 
       };
     case userConstants.REGISTER_GUEST_FAILURE:
@@ -81,7 +82,9 @@ export function user(state = initialState, action) {
     case userConstants.VERIFY_SUCCESS:
       return {
           ...state,
-          api_token: action.data.api_token
+          api_token: action.data.api_token,
+          avatar: action.data.user.avatar
+
       };
     case userConstants.VERIFY_FAILURE:
       return {};
@@ -98,7 +101,8 @@ export function user(state = initialState, action) {
           name: action.data.user.name,
           guest: action.data.user.guest,
           _id: action.data.user._id,
-          api_token: action.data.api_token
+          api_token: action.data.api_token,
+          avatar: action.data.user.avatar
       };
     case userConstants.LOGIN_FAILURE:
       return {};

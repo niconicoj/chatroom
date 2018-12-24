@@ -92,7 +92,7 @@ const styles = theme => ({
 class Message extends React.Component {
   
   render () {
-    const { classes, text, sent, time, sender, id } = this.props;
+    const { classes, sent, time, message } = this.props;
 
     const align = sent ? "flex-end" : "flex-start";
 
@@ -106,10 +106,12 @@ class Message extends React.Component {
 
     var embededContent = "";
 
+    const messageAvatar = message.user.avatar ? message.user.avatar : `https://www.gravatar.com/avatar/${message.userId}?d=retro`;
+
     var regExp = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|&v(?:i)?=))([^#&?]{11})/;
 
-    if (text.match(regExp)){
-      var match = text.match(regExp);
+    if (message.message.match(regExp)){
+      var match = message.message.match(regExp);
       var embedId = match&&match[1].length===11 ? match[1] : false;
       console.log(embedId);
       embededContent = <iframe className={classes.embedIframe} src={`https://www.youtube.com/embed/${embedId}`} frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
@@ -124,11 +126,11 @@ class Message extends React.Component {
         alignItems={align}
       >  
         <Paper className={styleClass} elevation={0}>
-          <Badge badgeContent={<Avatar src={`https://www.gravatar.com/avatar/${id}?d=retro`} className={classes.avatar}/>} color="secondary" classes={{ badge: badgeClass }}>
+          <Badge badgeContent={<Avatar src={messageAvatar} className={classes.avatar}/>} color="secondary" classes={{ badge: badgeClass }}>
             <Grid container className={classes.test}>
               <Grid item xs={12}>
               <Typography className={textColor} component="p">
-                {text}
+                {message.message}
               </Typography>
               </Grid>
               <Grid item xs={12} className={classes.embed}>
@@ -138,7 +140,7 @@ class Message extends React.Component {
           </Badge>
         </Paper>
         <Typography variant="caption" className={classes.info}>
-          {sender}, <Moment tz={timezone} locale="en" interval={5} fromNow date={localRelativeTime} />
+          {message.user.name}, <Moment tz={timezone} locale="en" interval={5} fromNow date={localRelativeTime} />
         </Typography>
       </Grid>
     )

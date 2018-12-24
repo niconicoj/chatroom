@@ -44,10 +44,12 @@ class MessageFeed extends React.Component {
     						return <Message 
                   key={message._id} 
                   text={message.message} 
-                  sent={message.username === user.name} 
+                  sent={message.user.name === user.name} 
                   time={message.created_at} 
                   sender={message.username}
                   id={message.userId}
+                  avatar={message.avatar}
+                  message={message}
                 />
 							});
 
