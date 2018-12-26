@@ -116,7 +116,6 @@ class Message extends React.Component {
     if (message.message.match(regExp)){
       var match = message.message.match(regExp);
       var embedId = match&&match[1].length===11 ? match[1] : false;
-      console.log(embedId);
       embededContent = <iframe className={classes.embedIframe} src={`https://www.youtube.com/embed/${embedId}`} frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
     }
 
@@ -127,7 +126,7 @@ class Message extends React.Component {
         direction="column"
         justify="flex-start"
         alignItems={align}
-        className={Boolean(message.sending) && classes.sending}
+        className={Boolean(message.sending) ? classes.sending : ""}
       >  
         <Paper className={styleClass} elevation={0}>
           <Badge badgeContent={<Avatar src={messageAvatar} className={classes.avatar}/>} color="secondary" classes={{ badge: badgeClass }}>
