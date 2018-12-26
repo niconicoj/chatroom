@@ -37,7 +37,7 @@ class Main extends React.Component {
     super(props);
 
     this.state = {
-        loading: false,
+        loading: true,
     };
   }
 
@@ -47,11 +47,12 @@ class Main extends React.Component {
     } else {
       this.props.dispatch(usersActions.verifyUser(this.props.user._id));
     }
+    this.setState({loading: false});
   }
 
   render() {
 
-    const { classes, chatrooms } = this.props;
+    const { classes } = this.props;
 
     return (
       <Router>
@@ -68,7 +69,7 @@ class Main extends React.Component {
           <Modal
             aria-labelledby="simple-modal-title"
             aria-describedby="simple-modal-description"
-            open={Boolean(chatrooms.loading)}
+            open={this.state.loading}
           >
             <CircularProgress className={classes.progress} disableShrink size={200} color="secondary"/>
           </Modal>
@@ -85,11 +86,10 @@ Main.propTypes = {
 };
 
 function mapStateToProps(state) {
-    const { alert, user, chatrooms } = state;
+    const { alert, user } = state;
     return {
         alert,
-        user,
-        chatrooms
+        user
     };
 }
 

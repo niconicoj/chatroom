@@ -11,7 +11,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import Typography from '@material-ui/core/Typography';
 import { TextField, Button, Grid, Card } from '@material-ui/core';
 
-import { usersActions } from '../../actions';
+import { usersActions, dialogActions } from '../../actions';
 
 const styles = theme => ({
   appBarSpacer: {
@@ -19,9 +19,11 @@ const styles = theme => ({
     display: 'block',
   },
   saveButton: {
-    [theme.breakpoints.down('xs')]: {
+
       marginTop: 20,
-    },
+  },
+  uploadButton: {
+    marginTop: 20
   },
   avatar: {
     marginTop: 20,
@@ -79,6 +81,10 @@ class Account extends React.Component {
 
   handleSaveAvatar = () => {
     this.props.dispatch(usersActions.changeAvatar(this.props.user._id, this.state.avatar, this.props.user.api_token));
+  }
+
+  openUploadPicture =() => {
+    this.props.dispatch(dialogActions.openUploadPicture());
   }
   
   render () {
@@ -191,19 +197,28 @@ class Account extends React.Component {
                 alignItems="center"
               >
                 <Grid item xs={10}>
-                <Typography>
-                  Avatar :
-                </Typography>
-                <TextField
-                  value={this.state.avatar}
-                  fullWidth
-                  className={classes.textField}
-                  onChange={this.handleChange}
-			            onKeyPress={this.handleKeyPress}
-                  name="avatar"
-                >
-                </TextField>
-                <img src={avatar} alt={'avatar'} className={classes.avatar} />
+                  <Grid
+                    container
+                    direction="column"
+                    justify="space-between"
+                    alignItems="flex-start"
+                  >
+                    <Typography>
+                      Avatar :
+                    </Typography>
+                    <TextField
+                      value={this.state.avatar}
+                      fullWidth
+                      className={classes.textField}
+                      onChange={this.handleChange}
+                      onKeyPress={this.handleKeyPress}
+                      name="avatar"
+                    />
+                    <img src={avatar} alt={'avatar'} className={classes.avatar} />
+                    <Button variant="contained" className={classes.uploadButton} onClick={this.openUploadPicture}>
+                      Upload a picture
+                    </Button>
+                  </Grid>
                 </Grid>
                 <Grid item>
                   <Button variant="contained" className={classes.saveButton} onClick={this.handleSaveAvatar}>

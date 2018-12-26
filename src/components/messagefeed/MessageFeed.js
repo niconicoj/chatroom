@@ -66,10 +66,9 @@ class MessageFeed extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { alert, user } = state;
+  const { user } = state;
   const { messages } = state.chatrooms;
   return {
-    alert,
     user,
     messages
   };

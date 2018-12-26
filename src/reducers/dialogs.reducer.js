@@ -12,6 +12,11 @@ export function dialog(state = {}, action) {
         ...state,
         login: true
       };
+      case dialogConstants.OPEN_UPLOAD_PICTURE:
+      return {
+        ...state,
+        uploadPicture: true
+      };
     case dialogConstants.CLOSE:
       return {};
     default:

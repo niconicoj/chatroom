@@ -2,6 +2,7 @@ import React from 'react';
 
 import { CreateAccountDialog } from "./CreateAccountDialog";
 import { LoginDialog } from "./LoginDialog";
+import { UploadPictureDialog } from "./UploadPictureDialog";
 
 class Dialogs extends React.Component {
 
@@ -12,6 +13,7 @@ class Dialogs extends React.Component {
     	<div>
     		<CreateAccountDialog />
     		<LoginDialog />
+        <UploadPictureDialog />
     	</div>
     )
   }

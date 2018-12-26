@@ -3,7 +3,8 @@ import { dialogConstants } from '../constants';
 export const dialogActions = {
     openCreateAccount,
     openLogin,
-    closeDialog
+    closeDialog,
+    openUploadPicture
 };
 
 function openCreateAccount() {
@@ -12,6 +13,10 @@ function openCreateAccount() {
 
 function openLogin() {
     return { type: dialogConstants.OPEN_LOGIN };
+}
+
+function openUploadPicture() {
+    return { type: dialogConstants.OPEN_UPLOAD_PICTURE };
 }
 
 function closeDialog() {
