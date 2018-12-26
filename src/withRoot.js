@@ -18,6 +18,12 @@ const theme = createMuiTheme({
       dark: '#c6a700',
       contrastText: '#000',
     },
+    attention: {
+      light: '#ff5a36',
+      main: '#ff0000',
+      dark: '#c20000',
+      contrastText: '#000',
+    },
   },
   typography: {
     useNextVariants: true,
