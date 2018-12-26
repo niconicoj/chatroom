@@ -68,7 +68,7 @@ function getChatroomMessages(chatroom) {
 
 function sendMessages(text, user, chatroom) {
   return dispatch => {
-    dispatch(request());
+    dispatch(request({message: text, chatroom, user}));
     chatroomsService.sendMessage(text, user, chatroom)
     .then(
       message => {
@@ -79,7 +79,7 @@ function sendMessages(text, user, chatroom) {
       );
   };
 
-  function request() { return { type: chatroomsConstants.SEND_MESSAGE_REQUEST} }
+  function request(message) { return { type: chatroomsConstants.SEND_MESSAGE_REQUEST, message } }
   function success(message) { return { type: chatroomsConstants.SEND_MESSAGE_SUCCESS, message } }
   function failure(error) { return { type: chatroomsConstants.SEND_MESSAGE_FAILURE, error } }
 }

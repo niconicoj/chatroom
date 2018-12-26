@@ -67,12 +67,14 @@ export function chatrooms(state = {}, action) {
 
     case chatroomsConstants.SEND_MESSAGE_REQUEST:
       return {
-        ...state
+        ...state,
+        messages: [...state.messages, {...action.message, sending:true}]
       };
     case chatroomsConstants.SEND_MESSAGE_SUCCESS:
       return {
         ...state,
-        messages: [...state.messages, action.message]
+        messages: [...state.messages.filter(message => !Boolean(message.sending)),
+          action.message]
       };
     case chatroomsConstants.SEND_MESSAGE_FAILURE:
       return { 

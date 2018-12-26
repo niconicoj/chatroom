@@ -86,6 +86,9 @@ const styles = theme => ({
       width: 256,
       height: 144
     }
+  },
+  sending: {
+    opacity: 0.7
   }
 });
 
@@ -124,6 +127,7 @@ class Message extends React.Component {
         direction="column"
         justify="flex-start"
         alignItems={align}
+        className={Boolean(message.sending) && classes.sending}
       >  
         <Paper className={styleClass} elevation={0}>
           <Badge badgeContent={<Avatar src={messageAvatar} className={classes.avatar}/>} color="secondary" classes={{ badge: badgeClass }}>
@@ -140,7 +144,9 @@ class Message extends React.Component {
           </Badge>
         </Paper>
         <Typography variant="caption" className={classes.info}>
-          {message.user.name}, <Moment tz={timezone} locale="en" interval={5} fromNow date={localRelativeTime} />
+          {message.user.name}, 
+        { Boolean(message.sending) ? "sending...":
+          <Moment tz={timezone} locale="en" interval={5} fromNow date={localRelativeTime} />}
         </Typography>
       </Grid>
     )
