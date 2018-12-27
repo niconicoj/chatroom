@@ -11,29 +11,52 @@ import Button from '@material-ui/core/Button';
 
 import withMobileDialog from '@material-ui/core/withMobileDialog';
 
-import { dialogActions } from '../../actions';
+import { dialogActions, usersActions } from '../../actions';
 import { Grid } from '@material-ui/core';
 
 const styles = theme => ({
   input: {
-    display: 'none',
-  }
+		display: 'none',
+	},
+	image: {
+		marginTop: 20,
+		maxHeight: 240,
+		maxWidth: 240
+	},
+	button: {
+		marginTop: 20
+	}
 });
 
 class UploadPictureDialog extends React.Component {
 
 	state = {
 		error: false,
-    image: false
+		image: false,
+		fileURL: null,
+		file: null
   }
 
 	handleClose = () => {
 		this.props.dispatch(dialogActions.closeDialog());
 	}
 
+	readFile = (event) => {
+			this.setState({
+				fileURL: URL.createObjectURL(event.target.files[0]),
+				file: event.target.files[0],
+			});
+			console.log(event.target.files);
+	}
+
+	handleUpload = () => {
+		this.props.dispatch(usersActions.uploadAvatar(this.props.user._id, this.state.file, this.props.user.api_token));
+		this.handleClose();
+	}
+
   render () {
 
-  	const { classes, fullScreen, dialog, image } = this.props;
+  	const { classes, fullScreen, dialog } = this.props;
   	const open = dialog.uploadPicture;
 
     return (
@@ -52,7 +75,7 @@ class UploadPictureDialog extends React.Component {
 						alignItems="center"
 					>
 						<DialogContentText>
-							You will be able to upload a picture to use as an avatar here !
+							You can browse your folders for a picture to use as an avatar and then upload it here !
 						</DialogContentText>
 						<input
 							accept="image/*"
@@ -60,20 +83,24 @@ class UploadPictureDialog extends React.Component {
 							id="contained-button-file"
 							multiple
 							type="file"
+							onChange={(event)=> { 
+								this.readFile(event) 
+							}}
 						/>
 						<label htmlFor="contained-button-file">
-							<Button variant="contained" component="span">
-								Upload
+							<Button variant="contained" component="span" className={classes.button}>
+								Browse
 							</Button>
 						</label>
+						<img src={this.state.fileURL ? this.state.fileURL : "https://dummyimage.com/240x240/c2c2c2/dedede&text=your+image+here"} className={classes.image}/>
 					</Grid>
 			  </DialogContent>
 			  <DialogActions>
 			    <Button onClick={this.handleClose}>
 			      Cancel
 			    </Button>
-					<Button onClick={this.handleClose} color="primary">
-			      Cancel
+					<Button onClick={this.handleUpload} color="primary">
+			      upload
 			    </Button>
 			  </DialogActions>
 			</Dialog>

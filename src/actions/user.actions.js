@@ -11,7 +11,8 @@ export const usersActions = {
   verifyUser,
   login,
   logout,
-  changeAvatar
+  changeAvatar,
+  uploadAvatar
 };
 
 function enterChatroom(chatroom, user) {
@@ -190,4 +191,25 @@ function changeAvatar(id, avatar, token) {
   function request(data) { return { type: userConstants.CHANGE_AVATAR_REQUEST, data } }
   function success(data) { return { type: userConstants.CHANGE_AVATAR_SUCCESS, data } }
   function failure(error) { return { type: userConstants.CHANGE_AVATAR_FAILURE, error } }
+}
+
+function uploadAvatar(id, avatar, token ) {
+  return dispatch => {
+    dispatch(request({avatar: avatar}));
+
+    usersService.uploadAvatar( avatar ).then(
+      data => {
+        dispatch(success(data));
+        dispatch(changeAvatar(id, data.url, token));
+      },
+      error => {
+        dispatch(failure(error.toString()));
+        dispatch(alertActions.error(error.toString()));
+      }
+    );
+  };
+
+  function request(data) { return { type: userConstants.UPLOAD_AVATAR_REQUEST, data } }
+  function success(data) { return { type: userConstants.UPLOAD_AVATAR_SUCCESS, data } }
+  function failure(error) { return { type: userConstants.UPLOAD_AVATAR_FAILURE, error } }
 }

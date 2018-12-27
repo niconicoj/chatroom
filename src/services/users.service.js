@@ -5,7 +5,8 @@ export const usersService = {
   createAccount,
   getUser,
   login,
-  changeAvatar
+  changeAvatar,
+  uploadAvatar
 };
 
 function createGuest() {
@@ -74,6 +75,24 @@ function changeAvatar(id, avatar, token) {
     .then(handleResponse)
     .then(user => {
       return user;
+    });
+}
+
+function uploadAvatar( avatar ) {
+  var formData = new FormData();
+  formData.append('image',avatar);
+  console.log(avatar);
+  console.log(formData);
+  const requestOptions = {
+    method: 'POST',
+    body: formData
+  };
+
+  return fetch(`${config.apiUrl}/images`, requestOptions)
+    .then(handleResponse)
+    .then(data => {
+      data.url = "https://252.ip-51-75-252.eu".concat(data.url);
+      return data;
     });
 }
 
